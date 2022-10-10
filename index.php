@@ -1,3 +1,8 @@
+<?php
+// session
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,21 +15,13 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Secular+One&display=swap" rel="stylesheet">
 
-    <title>Register</title>
+    <title>Login</title>
 </head>
 
 <body>
-    <h1> ini halaman register </h1>
-    <form action="" method="post">
-        <input type="text" name="username" placeholder="Username"> <br>
-        <input type="password" name="password" placeholder="Password"> <br>
-        <input type="password" name="konfirmpassword" placeholder="Confirm Password">
-        <br><br>
-        <input type="submit" value="login">
-        <br><br>
-        <a href="../login">Sign Up</a>
-    </form>
-
+    <h1>Ini Home Page</h1>
+    <a href="login.php">Login</a>
+    <a href="post.php">Matoor</a>
 
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
@@ -32,5 +29,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js" integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk" crossorigin="anonymous">
     </script>
 </body>
+
+</html>
 
 </html>
