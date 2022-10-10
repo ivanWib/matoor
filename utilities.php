@@ -37,9 +37,9 @@ function registration($data)
         return false;
     }
 
-    $password = password_hash($password, PASSWORD_DEFAULT);
+    $password = password_hash($password, PASSWORD_BCRYPT);
 
-    mysqli_query($connect, "INSERT INTO users VALUES('', '$username', '$email','$password', 'default.png')");
+    mysqli_query($connect, "INSERT INTO users VALUES('', '$username', '', '$email','$password', 'default.png')");
 
     return mysqli_affected_rows($connect);
 }
@@ -58,3 +58,80 @@ function postingan($add)
 
     return mysqli_affected_rows($connect);
 }
+
+
+function edit($data)
+{
+    global $connect;
+    session_start();
+    $id = $_SESSION["id_user"];
+
+    $username = htmlspecialchars($data["username"]);
+    $namalengkap = htmlspecialchars($data["namalengkap"]);
+    $email = htmlspecialchars($data["email"]);
+    $foto_lama = htmlspecialchars($data["foto_lama"]);
+
+    if ($_FILES["foto"]["error"] === 4) {
+        $foto = $foto_lama;
+    } else {
+        $foto = upload();
+    }
+
+
+    $query = "UPDATE users SET
+                username = '$username',
+                nama_lengkap = '$namalengkap',
+                email = '$email',
+                foto = '$foto'
+                WHERE id_user = $id
+            ";
+
+    mysqli_query($connect, $query);
+
+    return mysqli_affected_rows($connect);
+}
+
+function upload()
+{
+    $namaFile = $_FILES['foto']['name'];
+    $ukuranFile = $_FILES['foto']['size'];
+    $error = $_FILES['foto']['error'];
+    $tmpName = $_FILES['foto']['tmp_name'];
+
+    if ($error === 4) {
+        echo "<script>
+                alert('Pilih gambar terlebih dahulu!');
+            </script>";
+        return false;
+    }
+
+    $ekstensiGambarValid = ['jpg', 'jpeg', 'png'];
+    $ekstensiGambar = explode('.', $namaFile);
+    $ekstensiGambar = strtolower(end($ekstensiGambar));
+    if (!in_array($ekstensiGambar, $ekstensiGambarValid)) {
+        echo "<script>
+                alert('Yang anda upload bukan gambar!');
+            </script>";
+        return false;
+    }
+
+    if ($ukuranFile > 1000000) {
+        echo "<script>
+                alert('Ukuran gambar terlalu besar!');
+            </script>";
+        return false;
+    }
+
+    $namaFileBaru = uniqid();
+    $namaFileBaru .= '.';
+    $namaFileBaru .= $ekstensiGambar;
+
+    move_uploaded_file($tmpName, 'foto/' . $namaFileBaru);
+
+    return $namaFileBaru;
+}
+
+
+// function reset_password($data){
+    
+// }

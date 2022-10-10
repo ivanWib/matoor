@@ -66,8 +66,7 @@ if (isset($_POST["post"])) {
 
             <div class="form-group mt-3">
                 <label for="nama-content">Comment</label>
-                <textarea class="form-control" name="content">
-                </textarea>
+                <textarea class="form-control" name="content"></textarea>
             </div>
             <div class="form-group">
                 <button type="submit" class="btn btn-primary" name="post">Post</button>
