@@ -7,7 +7,7 @@ if ($_SESSION["login"] == false) {
     exit;
 }
 $data = query("SELECT * FROM users WHERE id_user = $_SESSION[id_user]")[0];
-$add = query("SELECT * FROM posts WHERE id_user = $_SESSION[id_user]")[0];
+$add = query("SELECT * FROM posts");
 ?>
 
 
@@ -55,27 +55,30 @@ $add = query("SELECT * FROM posts WHERE id_user = $_SESSION[id_user]")[0];
         </div>
         <div id="post" class="w-50">
             <h1>POST</h1>
-            <table border="1">
-                <tr>
-                    <th>Category</th>
-                    <th>Content</th>
-                </tr>
-                <?php foreach ($posts as $row) : ?>
-                <tr>
-                    <td><?= $row['category'] ?></td>
-                    <td><?= $row['content'] ?></td>
-                </tr>
+            <?php foreach ($add as $row) :
+                $user = query("SELECT * FROM users WHERE id_user = " . $row["id_user"])[0];
+            ?>
+            <div class="d-flex flex-column gap-2">
+                <div class="d-flex flex-row gap-2">
+                    <div class="w-auto">
+                        <img src="foto/<?= $user["foto"] ?>" alt="foto" width="50" />
+                    </div>
+                    <div class="d-flex flex-column w-50">
+                        <h3><?= $user["username"] ?></h3>
+                        <p><?= $row["content"]; ?></p>
+                    </div>
+                </div>
                 <?php endforeach; ?>
-            </table>
-        </div>
-    </div>
+            </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
-        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js"
-        integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk" crossorigin="anonymous">
-    </script>
+            <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+                integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+                crossorigin="anonymous">
+            </script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js"
+                integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk"
+                crossorigin="anonymous">
+            </script>
 </body>
 
 </html>

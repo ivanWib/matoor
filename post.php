@@ -3,21 +3,6 @@ session_start();
 require_once 'utilities.php';
 
 if (isset($_POST["post"])) {
-    // if (postingan($_POST) > 0) {
-    //     echo "
-    //   <script>
-    //     alert('Data telah ditambahkan');
-    //     document.location.href = 'index.php';
-    //   </script>
-    //   ";
-    // } else {
-    //     echo "
-    //   <script>
-    //     alert('Data gagal ditambahkan');
-    //     document.location.href = 'index.php';
-    //   </script>
-    //   ";
-    // }
 
     if (postingan($_POST) > 0) {
         echo "<script>
@@ -28,9 +13,6 @@ if (isset($_POST["post"])) {
         echo mysqli_error($connect);
     }
 }
-
-
-
 
 ?>
 

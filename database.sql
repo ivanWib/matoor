@@ -17,6 +17,7 @@ CREATE TABLE posts (
   id_user int NOT NULL,
   category varchar(100) NOT NULL,
   content text NOT NULL,
+  foto varchar(100),
   PRIMARY KEY (id_post),
   FOREIGN KEY (id_user) REFERENCES users(id_user)
 )engine=InnoDB;

@@ -1,6 +1,10 @@
 <?php
 $connect = mysqli_connect("localhost", "root", "", "matoor");
 
+function getUsernamePost()
+{
+}
+
 function query($query)
 {
     global $connect;
@@ -52,7 +56,7 @@ function postingan($add)
 
     $id_user = $_SESSION["id_user"];
 
-    $query = "INSERT INTO posts VALUES ('', '$id_user', '$category', '$content')";
+    $query = "INSERT INTO posts VALUES ('', '$id_user', '$category', '$content', '')";
 
     mysqli_query($connect, $query);
 
@@ -131,7 +135,46 @@ function upload()
     return $namaFileBaru;
 }
 
-
 // function reset_password($data){
-    
+
 // }
+
+// algoritma like post
+function like($data)
+{
+    global $connect;
+    $id_user = $_SESSION["id_user"];
+    $id_post = $data["id_post"];
+    $query = "INSERT INTO likes VALUES ('', '$id_user', '$id_post')";
+    mysqli_query($connect, $query);
+    return mysqli_affected_rows($connect);
+}
+
+// algoritma trend post berdasarkan jumlah like post tertinggi dan comment tertinggi
+function trend()
+{
+    global $connect;
+    // jumlah like post tertinggi dan comment tertinggi diambil dari tabel likes dan comments dan diurutkan dari yang tertinggi
+    $query = "SELECT * FROM posts ORDER BY (SELECT COUNT(*) FROM likes WHERE likes.id_post = posts.id_post) DESC, 
+    (SELECT COUNT(*) FROM comments WHERE comments.id_post = posts.id_post) DESC";
+
+    $result = mysqli_query($connect, $query);
+    $rows = [];
+    while ($row = mysqli_fetch_assoc($result)) {
+        $rows[] = $row;
+    }
+    return $rows;
+}
+
+// algoritma trend post
+function trend_post()
+{
+    global $connect;
+    $query = "SELECT * FROM posts ORDER BY id_post DESC";
+    $result = mysqli_query($connect, $query);
+    $rows = [];
+    while ($row = mysqli_fetch_assoc($result)) {
+        $rows[] = $row;
+    }
+    return $rows;
+}
