@@ -1,6 +1,18 @@
 <?php
 $connect = mysqli_connect("localhost", "root", "", "matoor");
 
+function query($query)
+{
+    global $connect;
+
+    $result = mysqli_query($connect, $query);
+    $rows = [];
+    while ($row = mysqli_fetch_assoc($result)) {
+        $rows[] = $row;
+    }
+    return $rows;
+}
+
 function registration($data)
 {
     global $connect;
@@ -28,6 +40,19 @@ function registration($data)
     $password = password_hash($password, PASSWORD_DEFAULT);
 
     mysqli_query($connect, "INSERT INTO users VALUES('', '$username', '$email','$password', 'default.png')");
+
+    return mysqli_affected_rows($connect);
+}
+
+function postingan($add)
+{
+    global $connect;
+    $category = htmlspecialchars($add["category"]);
+    $content = htmlspecialchars($add["content"]);
+
+    $query = "INSERT INTO posts VALUES ('', '', '$category', '$content')";
+
+    mysqli_query($connect, $query);
 
     return mysqli_affected_rows($connect);
 }
