@@ -50,7 +50,9 @@ function postingan($add)
     $category = htmlspecialchars($add["category"]);
     $content = htmlspecialchars($add["content"]);
 
-    $query = "INSERT INTO posts VALUES ('', '', '$category', '$content')";
+    $id_user = $_SESSION["id_user"];
+
+    $query = "INSERT INTO posts VALUES ('', '$id_user', '$category', '$content')";
 
     mysqli_query($connect, $query);
 
