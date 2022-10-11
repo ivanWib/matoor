@@ -2,9 +2,11 @@
 session_start();
 require "utilities.php";
 
-if ($_SESSION["login"] === false) {
-    header("Location: login.php");
-    exit;
+if (!isset($_SESSION["login"])) {
+    echo "<script>
+    alert('Login Dulu Brooo');
+    document.location.href = 'index.php';
+    </script>";
 }
 
 if (isset($_GET["id"])) {

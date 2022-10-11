@@ -2,20 +2,12 @@
 session_start();
 require "utilities.php";
 
-// if ($_SESSION["login"] == false) {
-//     header("Location: login.php");
-//     exit;
-// }
-if(isset($_SESSION["login"])) {
-    $data = query("SELECT * FROM users WHERE id_user = $_SESSION[id_user]")[0];
-} else {
-    $data = array(
-        "foto" => "default.png",
-        "username" => "Guest",
-        "nama_lengkap" => "Login dulu benk:v",
-        "id_user" => 0
-    );
+if ($_SESSION["login"] == false) {
+    header("Location: login.php");
+    exit;
 }
+
+$data = query("SELECT * FROM users WHERE id_user = $_SESSION[id_user]")[0];
 $add = query("SELECT * FROM posts");
 
 ?>
@@ -37,39 +29,33 @@ $add = query("SELECT * FROM posts");
 
 <body>
     <div id="container" class="d-flex flex-column">
-        <div class="w-100 position-fixed ps-3 pe-3">
-            <div id="navbar" class="d-flex justify-content-between">
-                <div>
-                    <h2>MATOOR</h2>
-                </div>
-                <?php if(!isset($_SESSION["login"])) { ?>
-                <div>
-                    <a href="login.php"><h2>Login</h2></a>
-                </div>
-                <?php } else { ?>
-                <div>
-                    <a href="logout.php"><h2>Logout</h2></a>
-                </div>
-                <?php } ?>
+        <div id="navbar" class="d-flex justify-content-between">
+            <div>
+                <h1>matoor</h1>
+            </div>
+            <div>
+                <h1>login</h1>
             </div>
         </div>
-        <div id="content" class="d-flex mt-5">
-            <div id="PROFILE" class="w-25 position-fixed">
-                <div class="card d-flex flex-column align-items-center" >
-                    <img class="card-img-top rounded-circle w-50 mt-3" src="foto/<?= $data["foto"] ?>" alt="Card image cap">
+        <div id="content" class="d-flex">
+            <div id="PROFILE" class="w-25">
+                <div class="card" style="">
+                    <img class="card-img-top" src="..." alt="Card image cap">
                     <div class="card-body">
-                       <h3 class="card-title text-center"><?= $data["username"]; ?></h3>
-                       <h4 class="card-title text-center"><?= $data["nama_lengkap"]; ?></h4>
+                       <h5 class="card-title">Card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                     </div>
-                    <?php if(isset($_SESSION["login"])) { ?>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Cras justo odio</li>
+                        <li class="list-group-item">Dapibus ac facilisis in</li>
+                        <li class="list-group-item">Vestibulum at eros</li>
+                    </ul>
                     <div class="card-body">
                         <a href="edit_profile.php?id=<?= $data['id_user'] ?>">Edit Profile</a>
                     </div>
-                    <?php } ?>
-                    
                 </div>
             </div>
-            <div id="DASHBOARD" class="w-75 d-flex justify-content-end">
+            <div id="DASHBOARD" class="w-75 d-flex justify-content-center">
                 <div id="bungkus" class="w-50">
                     <div class="justify-content-between d-flex align-items-center">
                         <h1>DASHBOARD</h1>
@@ -89,7 +75,7 @@ $add = query("SELECT * FROM posts");
                                     </div>
                                     <div class="text-muted medium ml-3">
                                         <h3></h3>
-                                        <strong>Category: </strong><p class="text-uppercase">#<?= $row["category"]; ?></p>
+                                        <strong>Category: </strong><p>#<?= $row["category"]; ?></p>
                                     </div>
                                 </div>
                             </div>
@@ -97,13 +83,13 @@ $add = query("SELECT * FROM posts");
                                 <p><?= $row["content"]; ?></p>
                             </div>
                             <div class="card-footer d-flex flex-wrap justify-content-between align-items-center mt-4">
-                                <div class="px-2 pt-2 d-flex gap-2"> 
+                                <div class="px-2 pt-2"> 
                                     <a href="like.php?id=<?= $row["id_post"] ?>"> 
                                     <iconify-icon icon="fontisto:like" width="30" height="30"></iconify-icon>
                                     </a>
                                     <p><?= $like["likes"] ?></p>
                                 </div>
-                                <div class="px-2 pt-2 d-flex gap-2">
+                                <div class="px-2 pt-2">
                                     <a href="comment.php?id=<?= $row["id_post"] ?>">
                                     <iconify-icon icon="heroicons:chat-bubble-oval-left-ellipsis-solid" width="30" height="30"></iconify-icon>
                                     </a>
