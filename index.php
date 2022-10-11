@@ -6,8 +6,10 @@ if ($_SESSION["login"] == false) {
     header("Location: login.php");
     exit;
 }
+
 $data = query("SELECT * FROM users WHERE id_user = $_SESSION[id_user]")[0];
 $add = query("SELECT * FROM posts");
+
 ?>
 
 
@@ -57,20 +59,35 @@ $add = query("SELECT * FROM posts");
             <h1>POST</h1>
             <?php foreach ($add as $row) :
                 $user = query("SELECT * FROM users WHERE id_user = " . $row["id_user"])[0];
+                $like = query("SELECT COUNT(id_user) 'likes' FROM likes WHERE id_post = " . $row["id_post"])[0];
             ?>
             <div class="d-flex flex-column gap-2">
                 <div class="d-flex flex-row gap-2">
-                    <div class="w-auto">
-                        <img src="foto/<?= $user["foto"] ?>" alt="foto" width="50" />
-                    </div>
-                    <div class="d-flex flex-column w-50">
-                        <h3><?= $user["username"] ?></h3>
-                        <p><?= $row["content"]; ?></p>
+                    <div class="card w-50">
+                        <div class="d-flex">
+                            <img src="foto/<?= $user["foto"] ?>" alt="foto" width="100" />
+                            <div class="d-flex justify-content-center">
+                                <h3><?= $user["username"] ?></h3>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-space-between">
+                            <div class="w-75">
+                                <p><?= $row["content"]; ?></p>
+                                <p>#<?= $row["category"]; ?></p>
+                            </div>
+                            <div class="w-25 d-flex flex-column align-items-end">
+                                <a href="like.php?id=<?= $row["id_post"]?>">
+                                    <iconify-icon icon="fontisto:like"></iconify-icon>
+                                </a>
+                                <p><?= $like["likes"] ?></p>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <?php endforeach; ?>
             </div>
 
+            <script src="https://code.iconify.design/iconify-icon/1.0.1/iconify-icon.min.js"></script>
             <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
                 integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
                 crossorigin="anonymous">

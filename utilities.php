@@ -1,10 +1,6 @@
 <?php
 $connect = mysqli_connect("localhost", "root", "", "matoor");
 
-function getUsernamePost()
-{
-}
-
 function query($query)
 {
     global $connect;
@@ -140,11 +136,11 @@ function upload()
 // }
 
 // algoritma like post
-function like($data)
+function like($add)
 {
     global $connect;
     $id_user = $_SESSION["id_user"];
-    $id_post = $data["id_post"];
+    $id_post = $add["id_post"];
     $query = "INSERT INTO likes VALUES ('', '$id_user', '$id_post')";
     mysqli_query($connect, $query);
     return mysqli_affected_rows($connect);

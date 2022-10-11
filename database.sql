@@ -32,13 +32,12 @@ CREATE TABLE comments (
   FOREIGN KEY (id_user) REFERENCES users(id_user)
 )engine=InnoDB;
 
--- CREATE TABLE likes (
---   id_like int AUTO_INCREMENT,
---   id_post int NOT NULL,
---   id_user int NOT NULL,
---   PRIMARY KEY (id_like),
---   FOREIGN KEY (id_post) REFERENCES posts(id_post),
---   FOREIGN KEY (id_user) REFERENCES users(id_user)
--- )engine=InnoDB;
+CREATE TABLE likes (
+  id_post int NOT NULL,
+  id_user int NOT NULL,
+  FOREIGN KEY (id_post) REFERENCES posts(id_post),
+  FOREIGN KEY (id_user) REFERENCES users(id_user)
+)engine=InnoDB;
+
 
 -- DROP DATABASE matoor;
