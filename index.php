@@ -29,7 +29,7 @@ $add = query("SELECT * FROM posts");
 
 <body>
     <div class="d-flex">
-        <div id="profile" class="w-50">
+        <div id="profile" class="w-25">
             <h1>Ini Home Page</h1>
             <h2><a href="login.php">Login</a></h2>
             <h2><a href="post.php">Matoor</a></h2>
@@ -55,33 +55,47 @@ $add = query("SELECT * FROM posts");
             </div>
         </div>
         <div id="post" class="w-50">
-            <h1>POST</h1>
+            <div class="justify-content-center d-flex align-items-center">
+                <h1># DASHBOARD</h1>
+            </div>
+
             <?php foreach ($add as $row) :
                 $user = query("SELECT * FROM users WHERE id_user = " . $row["id_user"])[0];
                 $like = query("SELECT COUNT(id_user) 'likes' FROM likes_post WHERE id_post = " . $row["id_post"])[0];
                 $comment = query("SELECT COUNT(id_post) 'comments' FROM comments WHERE id_post = " . $row["id_post"])[0];
             ?>
-                <div class="d-flex flex-column gap-2">
+                <!-- <div class="d-flex flex-column gap-2">
                     <div class="d-flex flex-row gap-2">
                         <div class="card w-50 p-3">
-                            <div class="d-flex">
-                                <img src="foto/<?= $user["foto"] ?>" alt="foto" width="100" />
-                                <div class="d-flex justify-content-center">
-                                    <h3><?= $user["username"] ?></h3>
+                            <div class="d-flex"> -->
+                <div class="container-fluid">
+                    <div class="col-md-12">
+                        <div class="card mb-2">
+                            <div class="card-header">
+                                <div class="media flex-wrap w-100 align-items-center"> 
+                                    <img src="foto/<?= $user["foto"] ?>" alt="foto" class="d-block rounded-circle" width="100" />
+                                    <div class="media-body ml-2">
+                                        <h3><?= $user["username"] ?></h3>
+                                    </div>
+                                    <div class="text-muted medium ml-3">
+                                        <h3></h3>
+                                        <div>
+                                            <strong>Category: </strong><p>#<?= $row["category"]; ?></p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="d-flex justify-content-space-between">
-                                <div class="w-75">
-                                    <p><?= $row["content"]; ?></p>
-                                    <p>#<?= $row["category"]; ?></p>
-                                </div>
-                                <div class="w-25 d-flex flex-column align-items-end">
-                                    <a href="like.php?id=<?= $row["id_post"] ?>">
-                                        <iconify-icon icon="fontisto:like" width="30" height="30"></iconify-icon>
+                            <div class="card-body">
+                                <p><?= $row["content"]; ?></p>
+                            </div>
+                            <div class="card-footer d-flex flex-wrap justify-content-between align-items-center">
+                                <div class="px-4 pt-3"> 
+                                    <a href="like.php?id=<?= $row["id_post"] ?>"> 
+                                    <iconify-icon icon="fontisto:like" width="30" height="30"></iconify-icon>
                                     </a>
                                     <p><?= $like["likes"] ?></p>
                                 </div>
-                                <div class="w-25 d-flex flex-column align-items-end">
+                                <div class="px-4 pt-3">
                                     <a href="comment.php?id=<?= $row["id_post"] ?>">
                                         <iconify-icon icon="heroicons:chat-bubble-oval-left-ellipsis-solid" width="30" height="30"></iconify-icon>
                                     </a>
@@ -90,8 +104,9 @@ $add = query("SELECT * FROM posts");
                             </div>
                         </div>
                     </div>
-                <?php endforeach; ?>
                 </div>
+            <?php endforeach; ?>
+        </div>
 
                 <script src="https://code.iconify.design/iconify-icon/1.0.1/iconify-icon.min.js"></script>
                 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
