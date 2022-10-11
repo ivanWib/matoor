@@ -3,7 +3,6 @@ session_start();
 require_once 'utilities.php';
 
 if (isset($_POST["post"])) {
-
     if (postingan($_POST) > 0) {
         echo "<script>
                 alert('Data telah ditambahkan');
@@ -30,7 +29,7 @@ if (isset($_POST["post"])) {
 
 <body>
     <div class="justify-content-center">
-        <h2>Post</h2>
+        <h2 class="text-capitalize">Post</h2>
     </div>
     <div class="container">
         <form action="" method="post">
@@ -45,7 +44,6 @@ if (isset($_POST["post"])) {
                     <option value="c#">C#</option>
                 </select>
             </div>
-
             <div class="form-group mt-3">
                 <label for="nama-content">Comment</label>
                 <textarea class="form-control" name="content"></textarea>

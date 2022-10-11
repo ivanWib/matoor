@@ -52,7 +52,7 @@ function postingan($add)
 
     $id_user = $_SESSION["id_user"];
 
-    $query = "INSERT INTO posts VALUES ('', '$id_user', '$category', '$content', '')";
+    $query = "INSERT INTO posts VALUES ('', '$id_user', '$category', '$content')";
 
     mysqli_query($connect, $query);
 
@@ -174,3 +174,28 @@ function trend_post()
     }
     return $rows;
 }
+
+function comment($add)
+{
+    global $connect;
+    $id_user = $_SESSION["id_user"];
+    $id_post = $add["id"];
+    $comment = htmlspecialchars($add["content"]);
+    $query = "INSERT INTO comments VALUES ('', '$id_post', '$id_user', '$comment')";
+    mysqli_query($connect, $query);
+    return mysqli_affected_rows($connect);
+}
+// function postingan($add)
+// {
+//     global $connect;
+//     $category = htmlspecialchars($add["category"]);
+//     $content = htmlspecialchars($add["content"]);
+
+//     $id_user = $_SESSION["id_user"];
+
+//     $query = "INSERT INTO posts VALUES ('', '$id_user', '$category', '$content')";
+
+//     mysqli_query($connect, $query);
+
+//     return mysqli_affected_rows($connect);
+// }
