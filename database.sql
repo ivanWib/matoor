@@ -17,6 +17,7 @@ CREATE TABLE posts (
   id_user   INT NOT NULL,
   category  VARCHAR(100) NOT NULL,
   content   TEXT NOT NULL,
+  date      VARCHAR(20) NOT NULL,
   PRIMARY   KEY (id_post),
   FOREIGN   KEY (id_user) REFERENCES users(id_user)
 )engine=InnoDB;
@@ -26,6 +27,7 @@ CREATE TABLE comments (
   id_post     INT NOT NULL,
   id_user     INT NOT NULL,
   content     TEXT NOT NULL,
+  date        VARCHAR(20) NOT NULL,
   PRIMARY     KEY (id_comment),
   FOREIGN     KEY (id_post) REFERENCES posts(id_post),
   FOREIGN     KEY (id_user) REFERENCES users(id_user)

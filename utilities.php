@@ -49,10 +49,11 @@ function postingan($add)
     global $connect;
     $category = htmlspecialchars($add["category"]);
     $content = htmlspecialchars($add["content"]);
+    $date = htmlspecialchars($add["tanggal"]);
 
     $id_user = $_SESSION["id_user"];
 
-    $query = "INSERT INTO posts VALUES ('', '$id_user', '$category', '$content')";
+    $query = "INSERT INTO posts VALUES ('', '$id_user', '$category', '$content', '$date')";
 
     mysqli_query($connect, $query);
 
@@ -135,16 +136,6 @@ function upload()
 
 // }
 
-// algoritma like post
-function like($add)
-{
-    global $connect;
-    $id_user = $_SESSION["id_user"];
-    $id_post = $add["id_post"];
-    $query = "INSERT INTO likes VALUES ('', '$id_user', '$id_post')";
-    mysqli_query($connect, $query);
-    return mysqli_affected_rows($connect);
-}
 
 // algoritma trend post berdasarkan jumlah like post tertinggi dan comment tertinggi
 function trend()
@@ -181,7 +172,9 @@ function comment($add)
     $id_user = $_SESSION["id_user"];
     $id_post = $add["id"];
     $comment = htmlspecialchars($add["content"]);
-    $query = "INSERT INTO comments VALUES ('', '$id_post', '$id_user', '$comment')";
+    $date = htmlspecialchars($add["tanggal"]);
+
+    $query = "INSERT INTO comments VALUES ('', '$id_post', '$id_user', '$comment', '$date')";
     mysqli_query($connect, $query);
     return mysqli_affected_rows($connect);
 }

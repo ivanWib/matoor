@@ -13,6 +13,8 @@ if (isset($_POST["post"])) {
     }
 }
 
+$tanggal = date("d M Y");
+
 ?>
 
 <!DOCTYPE html>
@@ -33,6 +35,7 @@ if (isset($_POST["post"])) {
     </div>
     <div class="container">
         <form action="" method="post">
+            <input type="hidden" name="tanggal" value="<?= $tanggal ?>">
             <div class="form-group mt-3">
                 <label for="nama-category">Topic</label>
                 <select class="form-control" name="category" required>
