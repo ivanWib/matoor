@@ -2,13 +2,6 @@
 session_start();
 require 'utilities.php';
 
-// if (!isset($_SESSION["login"])){
-//     echo "<script>
-//     alert('Login Dulu Brooo');
-//     document.location.href = 'index.php';
-//     </script>";
-// }
-$tanggal = date("d M Y");
 
 
 if (isset($_POST["comment"])) {
@@ -18,23 +11,21 @@ if (isset($_POST["comment"])) {
         document.location.href = 'index.php';
         </script>";
     } else if ($_POST["content"] === "") {
-        echo "<script>
-            alert('isi dulu');
-        </script>";
+        
     } else if (comment($_POST) > 0) {
-        echo "<script>
-                alert('Data telah ditambahkan');
-            </script>";
+
     } else {
         echo mysqli_error($connect);
     }
 }
+
+$tanggal = date("d M Y");
 $id = $_GET["id"];
 $add = query("SELECT * FROM posts WHERE id_post = $id");
-$addcomment = query("SELECT * FROM comments WHERE id_post = $id");
 $user = query("SELECT * FROM users WHERE id_user = " . $add[0]["id_user"]);
 $like = query("SELECT COUNT(id_user) 'likes' FROM likes_post WHERE id_post = " . $add[0]["id_post"]);
 $jumlahcom = query("SELECT COUNT(id_comment) 'jumlahcom' FROM comments WHERE id_post = " . $add[0]["id_post"]);
+$addcomment = query("SELECT * FROM comments WHERE id_post = $id");
 ?>
 
 <!DOCTYPE html>
@@ -51,15 +42,18 @@ $jumlahcom = query("SELECT COUNT(id_comment) 'jumlahcom' FROM comments WHERE id_
 
 <body>
     <div id="BUNGKUS" class="container d-flex flex-column align-items-center">
-        <div id="NAVBAR" class="navbar d-flex justify-content-between">
-            <a href="index.php">
-                <h1>balik bos</h1>
-            </a>
-            <h1>ini untuk navbar</h1>
+        <div id="navbar" class="navbar fixed-top d-flex justify-content-between">
+            <div class="container">
+                <div>
+                    <a href="index.php">
+                        <iconify-icon icon="akar-icons:arrow-back-thick-fill" width="30" height="30"></iconify-icon>
+                    </a>
+                </div>
+            </div>
         </div>
-        <div id="CONTENT">
+        <div id="CONTENT" class="mt-5">
             <div id="POSTINGAN" class="d-flex flex-column align-items-center">
-                <div class="card p-4 overflow-auto" style="width:600px; height:530px; border-radius:20px;">
+                <div class="mt-4 card p-4 overflow-auto" style="width:650px; height:580px; border-radius:20px;">
                     <div class="d-flex">
                         <img style="width:50px" class="card-img-top rounded-circle" src="foto/<?= $user[0]["foto"] ?>"
                             alt="foto" width="100" />
@@ -96,7 +90,7 @@ $jumlahcom = query("SELECT COUNT(id_comment) 'jumlahcom' FROM comments WHERE id_
                     <div id="COMMENT">
                         <?php foreach ($addcomment as $row) :
                             $user = query("SELECT * FROM users WHERE id_user = " . $row["id_user"])[0];
-                            $like = query("SELECT COUNT(id_user) 'likes' FROM likes_post WHERE id_post = " . $row["id_post"])[0];
+                            $like = query("SELECT COUNT(id_user) 'likes' FROM likes_comment WHERE id_comment = " . $row["id_comment"])[0];
                         ?>
                         <div class="column">
                             <div class="card mb-4 shadow p-3 mb-3 bg-body">
@@ -107,15 +101,15 @@ $jumlahcom = query("SELECT COUNT(id_comment) 'jumlahcom' FROM comments WHERE id_
                                         <h5 class="mb-0 ml-3"><?= $user["username"] ?></h5>
                                     </div>
                                 </div>
-                                <div>
-                                    <?= $row["date"] ?>
-                                </div>
                                 <div class="card p-2 mt-2">
                                     <p class="mb-0"><?= $row["content"]; ?></p>
                                 </div>
+                                <div>
+                                    <p style="font-size:12px" class="mb-0 mt-2"><?= $row["date"] ?></p>
+                                </div>
                                 <div class="d-flex flex-row justify-content-between align-items-center mt-2">
                                     <div class="px-2 pt-2 d-flex gap-2">
-                                        <a href="like.php?id=<?= $row["id_post"] ?>">
+                                        <a href="like_comment.php?id=<?= $row["id_comment"] ?>&post_id=<?= $id ?>">
                                             <iconify-icon icon="fontisto:like" width="30" height="30"></iconify-icon>
                                         </a>
                                         <p style="font-size:20px" class="mb-0 ml-2"><?= $like["likes"] ?></p>

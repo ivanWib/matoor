@@ -30,7 +30,44 @@ $tanggal = date("d M Y");
 </head>
 
 <body>
-    <div class="justify-content-center">
+    <div id="container" class="d-flex flex-column align-items-center">
+        <div id="navbar" class="navbar fixed-top d-flex justify-content-between">
+            <div class="container">
+                <div>
+                    <a href="index.php">
+                        <iconify-icon icon="akar-icons:arrow-back-thick-fill" width="30" height="30"></iconify-icon>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div id="form" class="mt-5 w-50">
+            <div class="container card mt-4 w-50" style="border-radius:15px">
+                <form action="" method="post">
+                    <input type="hidden" name="tanggal" value="<?= $tanggal ?>">
+                    <div class="form-group p-1">
+                        <textarea class="form-control mt-3" style="border-radius:10px" name="content" placeholder="Post Your Matoor"></textarea>
+                    </div>
+                    <div class="form-group p-1">
+                        <label for="nama-category">Topic</label>
+                        <select class="form-control" name="category" required>
+                            <option value=""> -- Topic -- </option>
+                            <option value="php">PHP</option>
+                            <option value="python">PYTHON</option>
+                            <option value="javascript">JAVASCRIPT</option>
+                            <option value="c++">C++</option>
+                            <option value="c#">C#</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <button type="submit" class="btn btn-primary mt-2" style="border-radius:10px" name="post">
+                            Post
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- <div class="justify-content-center">
         <h2 class="text-capitalize">Post</h2>
     </div>
     <div class="container">
@@ -55,8 +92,9 @@ $tanggal = date("d M Y");
                 <button type="submit" class="btn btn-primary" name="post">Post</button>
             </div>
         </form>
-    </div>
+    </div> -->
 
+    <script src="https://code.iconify.design/iconify-icon/1.0.1/iconify-icon.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
         integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
     </script>

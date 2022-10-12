@@ -22,6 +22,13 @@ CREATE TABLE posts (
   FOREIGN   KEY (id_user) REFERENCES users(id_user)
 )engine=InnoDB;
 
+CREATE TABLE likes_post (
+  id_post   INT NOT NULL,
+  id_user   INT NOT NULL,
+  FOREIGN KEY (id_post) REFERENCES posts(id_post),
+  FOREIGN KEY (id_user) REFERENCES users(id_user)
+)engine=InnoDB;
+
 CREATE TABLE comments (
   id_comment  INT AUTO_INCREMENT,
   id_post     INT NOT NULL,
@@ -33,19 +40,15 @@ CREATE TABLE comments (
   FOREIGN     KEY (id_user) REFERENCES users(id_user)
 )engine=InnoDB;
 
-CREATE TABLE likes_post (
-  id_post   INT NOT NULL,
-  id_user   INT NOT NULL,
-  FOREIGN KEY (id_post) REFERENCES posts(id_post),
-  FOREIGN KEY (id_user) REFERENCES users(id_user)
-)engine=InnoDB;
-
 CREATE TABLE likes_comment (
-  id_comment   INT NOT NULL,
-  id_user   INT NOT NULL,
+  id_comment  INT NOT NULL,
+  id_user     INT NOT NULL,
   FOREIGN KEY (id_comment) REFERENCES comments(id_comment),
   FOREIGN KEY (id_user) REFERENCES users(id_user)
 )engine=InnoDB;
+
+INSERT INTO users (username, email, password, foto) 
+VALUES    ('admin', 'admin@gmail.com', 'admin', 'default.png');
 
 
 -- DROP DATABASE matoor;
