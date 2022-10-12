@@ -2,15 +2,20 @@
 session_start();
 require 'utilities.php';
 
-if (!isset($_SESSION["login"])){
-    echo "<script>
-    alert('Login Dulu Brooo');
-    document.location.href = 'index.php';
-    </script>";
-}
+// if (!isset($_SESSION["login"])){
+//     echo "<script>
+//     alert('Login Dulu Brooo');
+//     document.location.href = 'index.php';
+//     </script>";
+// }
 
 if (isset($_POST["comment"])) {
-    if (comment($_POST) > 0) {
+    if (!isset($_SESSION["login"])){
+        echo "<script>
+        alert('Login Dulu Brooo');
+        document.location.href = 'index.php';
+        </script>";
+    } else if (comment($_POST) > 0) {
         echo "<script>
                 alert('Data telah ditambahkan');
                 document.location.href = 'index.php';
@@ -38,52 +43,46 @@ $jumlahcom = query("SELECT COUNT(id_comment) 'jumlahcom' FROM comments WHERE id_
 </head>
 
 <body>
-    <div class="d-flex flex-column align-items-center">
-        <div id="post" class="w-50">
-            <h1>Coments</h1>
-            <div class="d-flex flex-column gap-2">
-                <div class="d-flex flex-row gap-2">
-                    <div class="card w-50 p-3">
-                        <div class="d-flex">
-                            <img src="foto/<?= $user[0]["foto"] ?>" alt="foto" width="100" />
-                            <div class="d-flex justify-content-center">
-                                <h3><?= $user[0]["username"] ?></h3>
-                            </div>
+    <div id="BUNGKUS" class="container d-flex flex-column align-items-center">
+        <div id="NAVBAR" class="d-flex justify-content-between">
+            <a href="index.php"><h1>balik bos</h1></a>
+            <h1>ini untuk navbar</h1>
+        </div>
+        <div id="CONTENT">
+            <div id="POSTINGAN" class="d-flex flex-column align-items-center">
+                <div class="card p-4" style="width:600px; border-radius:20px;">
+                    <div class="d-flex">
+                        <img style="width:50px" class="card-img-top rounded-circle" src="foto/<?= $user[0]["foto"] ?>" alt="foto" width="100" />
+                        <div class="d-flex align-items-center ml-3">
+                            <h4><?= $user[0]["username"] ?></h4>
                         </div>
-                        <div class="d-flex justify-content-space-between">
-                            <div class="w-75">
-                                <p><?= $add[0]["content"]; ?></p>
-                                <p>#<?= $add[0]["category"]; ?></p>
-                            </div>
-                            <div class="w-25 d-flex flex-column align-items-end">
-                                <iconify-icon icon="fontisto:like" width="30" height="30"></iconify-icon>
-                                <p><?= $like[0]["likes"] ?></p>
-                            </div>
-                            <div class="w-25 d-flex flex-column align-items-end">
-                                <iconify-icon icon="heroicons:chat-bubble-oval-left-ellipsis-solid" width="30" height="30">
-                                </iconify-icon>
-                                <p><?= $jumlahcom[0]["jumlahcom"] ?></p>
-                            </div>
+                    </div>
+                    <div class="mt-3 d-flex flex-column">
+                        <div class="card p-3 shadow p-3 mb-3 bg-body" style="border-radius:15px;">
+                            <p><?= $add[0]["content"]; ?></p>
+                            <p class="text-uppercase mb-0">#<?= $add[0]["category"]; ?></p>
                         </div>
+                        <div class="d-flex align-items-center ml-2 mt-2">
+                            <iconify-icon icon="fontisto:like" width="30" height="30"></iconify-icon>
+                            <p style="font-size:20px" class="mb-0 ml-2"><?= $like[0]["likes"] ?></p>
+                            <iconify-icon class="ml-2" icon="heroicons:chat-bubble-oval-left-ellipsis-solid" width="30" height="30">
+                            </iconify-icon>
+                            <p style="font-size:20px" class="mb-0 ml-2"><?= $jumlahcom[0]["jumlahcom"] ?></p>
+                        </div>
+                    </div>
+                    <div id="COMMENT INPUT">
+                        <form action="" method="post">
+                            <input type="hidden" name="id" value="<?= $id ?>">
+                            <div class="form-group p-1">
+                                <textarea class="form-control mt-3" style="border-radius:10px" name="content" placeholder="Reply Your Matoor"></textarea>
+                                <button type="submit" class="btn btn-primary mt-2" style="border-radius:10px" name="comment">Post</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="w-50">
-            <div class="justify-content-center">
-                <h2 class="text-capitalize">Comment</h2>
-            </div>
-            <div class="card w-50">
-                <form action="" method="post">
-                    <input type="hidden" name="id" value="<?= $id ?>">
-                    <div class="form-group mt-3 p-3">
-                        <label for="nama-content">Comment</label>
-                        <textarea class="form-control" name="content"></textarea>
-                    </div>
-                    <div class="form-group p-3">
-                        <button type="submit" class="btn btn-primary" name="comment">Post</button>
-                    </div>
-                </form>
+            <div id="COMMENT">
+                <h1>ini untuk nampilin comment</h1>
             </div>
         </div>
     </div>

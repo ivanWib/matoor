@@ -2,12 +2,20 @@
 session_start();
 require "utilities.php";
 
-if ($_SESSION["login"] == false) {
-    header("Location: login.php");
-    exit;
+// if ($_SESSION["login"] == false) {
+//     header("Location: login.php");
+//     exit;
+// }
+if(isset($_SESSION["login"])) {
+    $data = query("SELECT * FROM users WHERE id_user = $_SESSION[id_user]")[0];
+} else {
+    $data = array(
+        "foto" => "default.png",
+        "username" => "Guest",
+        "nama_lengkap" => "Login dulu benk:v",
+        "id_user" => 0
+    );
 }
-
-$data = query("SELECT * FROM users WHERE id_user = $_SESSION[id_user]")[0];
 $add = query("SELECT * FROM posts");
 
 ?>
@@ -28,34 +36,40 @@ $add = query("SELECT * FROM posts");
 </head>
 
 <body>
-    <div id="container" class="d-flex flex-column">
-        <div id="navbar" class="d-flex justify-content-between">
-            <div>
-                <h1>matoor</h1>
-            </div>
-            <div>
-                <h1>login</h1>
+    <div id="container" class="container d-flex flex-column align-items-center">
+        <div id="navbar" class="navbar fixed-top d-flex justify-content-between">
+            <div class="container">
+                <div>
+                    <h2>Matoor</h2>
+                </div>
+                <?php if(!isset($_SESSION["login"])) { ?>
+                <div>
+                    <a href="login.php"><h2>Login</h2></a>
+                </div>
+                <?php } else { ?>
+                <div>
+                    <a href="logout.php"><h2>Logout</h2></a>
+                </div>
+                <?php } ?>
             </div>
         </div>
-        <div id="content" class="d-flex">
-            <div id="PROFILE" class="w-25">
-                <div class="card" style="">
-                    <img class="card-img-top" src="..." alt="Card image cap">
+        <div id="content" class=" d-flex flex-row mt-5 pt-5">
+            <div id="PROFILE" class="w-25 h-25 d-flex justify-content-center">
+                <div class="w-75 card d-flex flex-column align-items-center shadow p-3 mb-3 bg-body">
+                    <img class="card-img-top rounded-circle mt-3" style="width:100px" src="foto/<?= $data["foto"] ?>" alt="Card image cap">
                     <div class="card-body">
-                       <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                       <h3 class="card-title text-center"><?= $data["username"]; ?></h3>
+                       <h4 class="card-title text-center"><?= $data["nama_lengkap"]; ?></h4>
                     </div>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">Cras justo odio</li>
-                        <li class="list-group-item">Dapibus ac facilisis in</li>
-                        <li class="list-group-item">Vestibulum at eros</li>
-                    </ul>
+                    <?php if(isset($_SESSION["login"])) { ?>
                     <div class="card-body">
                         <a href="edit_profile.php?id=<?= $data['id_user'] ?>">Edit Profile</a>
                     </div>
+                    <?php } ?>
+                    
                 </div>
             </div>
-            <div id="DASHBOARD" class="w-75 d-flex justify-content-center">
+            <div id="DASHBOARD" class="w-75 d-flex justify-content-center" style="width:500px">
                 <div id="bungkus" class="w-50">
                     <div class="justify-content-between d-flex align-items-center">
                         <h1>DASHBOARD</h1>
@@ -66,34 +80,32 @@ $add = query("SELECT * FROM posts");
                         $comment = query("SELECT COUNT(id_post) 'comments' FROM comments WHERE id_post = " . $row["id_post"])[0];
                     ?> 
                     <div class="column">
-                        <div class="card mb-4 ">
-                            <div class="card-header ">
-                                <div class="media d-flex flex-wrap align-items-center justify-content-between"> 
-                                    <div class="justify-content-between d-flex flex-wrap align-items-center gap-3">
-                                        <img src="foto/<?= $user["foto"] ?>" alt="foto" class="d-block rounded-circle" width=60 >
-                                        <h5><?= $user["username"] ?></h5>
-                                    </div>
-                                    <div class="text-muted medium ml-3">
-                                        <h3></h3>
-                                        <strong>Category: </strong><p>#<?= $row["category"]; ?></p>
-                                    </div>
+                        <div class="card mb-4 shadow p-3 mb-3 bg-body">
+                            <div class="media d-flex flex-wrap align-items-center justify-content-between"> 
+                                <div class="justify-content-between d-flex flex-wrap align-items-center gap-3">
+                                    <img src="foto/<?= $user["foto"] ?>" alt="foto" class="d-block rounded-circle" width=60 >
+                                    <h5><?= $user["username"] ?></h5>
+                                </div>
+                                <div class="text-muted medium ml-3">
+                                    <h3></h3>
+                                    <strong>Category: </strong><p class="text-uppercase">#<?= $row["category"]; ?></p>
                                 </div>
                             </div>
-                            <div class="card-body">
+                            <div class="card p-2 mt-2">
                                 <p><?= $row["content"]; ?></p>
                             </div>
-                            <div class="card-footer d-flex flex-wrap justify-content-between align-items-center mt-4">
-                                <div class="px-2 pt-2"> 
+                            <div class="d-flex flex-row justify-content-between align-items-center mt-2">
+                                <div class="px-2 pt-2 d-flex gap-2"> 
                                     <a href="like.php?id=<?= $row["id_post"] ?>"> 
                                     <iconify-icon icon="fontisto:like" width="30" height="30"></iconify-icon>
                                     </a>
-                                    <p><?= $like["likes"] ?></p>
+                                    <p style="font-size:20px" class="mb-0 ml-2"><?= $like["likes"] ?></p>
                                 </div>
-                                <div class="px-2 pt-2">
+                                <div class="px-2 pt-2 d-flex gap-2">
                                     <a href="comment.php?id=<?= $row["id_post"] ?>">
                                     <iconify-icon icon="heroicons:chat-bubble-oval-left-ellipsis-solid" width="30" height="30"></iconify-icon>
                                     </a>
-                                    <p><?= $comment["comments"] ?></p>
+                                    <p style="font-size:20px" class="mb-0 ml-2"><?= $comment["comments"] ?></p>
                                 </div>
                             </div>
                         </div>
