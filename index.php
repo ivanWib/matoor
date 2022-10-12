@@ -36,7 +36,7 @@ $add = query("SELECT * FROM posts");
 </head>
 
 <body>
-    <div id="container" class="container d-flex flex-column align-items-center">
+    <div id="container" class="d-flex flex-column align-items-center">
         <div id="navbar" class="navbar card fixed-top d-flex justify-content-between">
             <div class="container">
                 <div>
@@ -53,7 +53,7 @@ $add = query("SELECT * FROM posts");
                 <?php } ?>
             </div>
         </div>
-        <div style="height:530px; width:1200px" class="card mt-5 overflow-auto">
+        <div id="body" style="height:530px; width:1200px; margin-top:80px" class="card overflow-auto">
             <div id="content" class="d-flex flex-row w-100">
                 <div id="PROFILE" class="w-25 d-flex justify-content-center position-fixed">
                     <div style="height:350px" class="w-75 mt-5 card d-flex flex-column align-items-center shadow p-3 mb-3 bg-body">
@@ -72,7 +72,7 @@ $add = query("SELECT * FROM posts");
                 </div>
                 <div id="DASHBOARD" style="width:90%" class="d-flex justify-content-end" style="width:500px">
                     <div id="bungkus" class="w-50">
-                        <div class="justify-content-between d-flex align-items-center mt-5">
+                        <div class="d-flex justify-content-center mt-5">
                             <h1>DASHBOARD</h1>
                         </div>
                         <?php foreach ($add as $row) :
