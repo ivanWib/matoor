@@ -48,7 +48,7 @@ CREATE TABLE likes_comment (
 )engine=InnoDB;
 
 INSERT INTO users (username, email, password, foto) 
-VALUES    ('admin', 'admin@gmail.com', 'admin', 'default.png');
+VALUES    ('admin', 'admin@gmail.com', '$2y$10$UwGQtOUf1Ln.jTbDfp8Ir.aNjDIQv1mCNWdCdg53i64AsgT3HYr22', 'default.png');
 
 
 -- DROP DATABASE matoor;

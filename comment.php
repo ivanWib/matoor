@@ -13,10 +13,11 @@ if (isset($_POST["comment"])) {
     } else if ($_POST["content"] === "") {
         
     } else if (comment($_POST) > 0) {
-
+        
     } else {
         echo mysqli_error($connect);
     }
+    $_POST["content"] = "";
 }
 
 $tanggal = date("d M Y");
@@ -45,7 +46,7 @@ $addcomment = query("SELECT * FROM comments WHERE id_post = $id");
         <div id="navbar" class="navbar fixed-top d-flex justify-content-between">
             <div class="container">
                 <div>
-                    <a href="index.php">
+                    <a style="text-decoration:none;color:#000000" href="index.php">
                         <iconify-icon icon="akar-icons:arrow-back-thick-fill" width="30" height="30"></iconify-icon>
                     </a>
                 </div>
@@ -56,9 +57,9 @@ $addcomment = query("SELECT * FROM comments WHERE id_post = $id");
                 <div class="mt-4 card p-4 overflow-auto" style="width:650px; height:580px; border-radius:20px;">
                     <div class="d-flex">
                         <img style="width:50px" class="card-img-top rounded-circle" src="foto/<?= $user[0]["foto"] ?>"
-                            alt="foto" width="100" />
+                            alt="foto" />
                         <div class="d-flex align-items-center ml-3">
-                            <h4 class="mb-0"><?= $user[0]["username"] ?></h4>
+                            <h5 class="mb-0"><?= $user[0]["username"] ?></h5>
                         </div>
                     </div>
                     <div class="mt-3 d-flex flex-column">
@@ -67,7 +68,9 @@ $addcomment = query("SELECT * FROM comments WHERE id_post = $id");
                             <p style="color:#0000FF" class="text-uppercase mb-0">#<?= $add[0]["category"]; ?></p>
                         </div>
                         <div class="d-flex align-items-center ml-2 mt-2">
-                            <iconify-icon icon="fontisto:like" width="20" height="20"></iconify-icon>
+                            <a style="text-decoration:none;color:#000000" class="d-flex align-items-center" href="like_post2.php?id=<?= $add[0]["id_post"] ?>&post_id=<?= $id ?>">
+                                <iconify-icon icon="fontisto:like" width="20" height="20"></iconify-icon>
+                            </a>
                             <p style="font-size:15px" class="mb-0 ml-2"><?= $like[0]["likes"] ?></p>
                             <iconify-icon class="ml-2" icon="heroicons:chat-bubble-oval-left-ellipsis-solid" width="20"
                                 height="20">
@@ -96,8 +99,7 @@ $addcomment = query("SELECT * FROM comments WHERE id_post = $id");
                             <div class="card mb-4 shadow p-3 mb-3 bg-body">
                                 <div class="media d-flex flex-wrap align-items-center justify-content-between">
                                     <div class="justify-content-between d-flex flex-wrap align-items-center gap-3">
-                                        <img src="foto/<?= $user["foto"] ?>" alt="foto" class="d-block rounded-circle"
-                                            width=60>
+                                        <img src="foto/<?= $user["foto"] ?>" alt="foto" style="width:50px" class="d-block rounded-circle"/>
                                         <h5 class="mb-0 ml-3"><?= $user["username"] ?></h5>
                                     </div>
                                 </div>
@@ -109,10 +111,10 @@ $addcomment = query("SELECT * FROM comments WHERE id_post = $id");
                                 </div>
                                 <div class="d-flex flex-row justify-content-between align-items-center mt-2">
                                     <div class="px-2 pt-2 d-flex gap-2">
-                                        <a href="like_comment.php?id=<?= $row["id_comment"] ?>&post_id=<?= $id ?>">
-                                            <iconify-icon icon="fontisto:like" width="30" height="30"></iconify-icon>
+                                        <a style="text-decoration:none;color:#000000" href="like_comment.php?id=<?= $row["id_comment"] ?>&post_id=<?= $id ?>">
+                                        <iconify-icon icon="fontisto:like" width="20" height="20"></iconify-icon>
                                         </a>
-                                        <p style="font-size:20px" class="mb-0 ml-2"><?= $like["likes"] ?></p>
+                                        <p style="font-size:15px" class="mb-0 ml-2"><?= $like["likes"] ?></p>
                                     </div>
                                 </div>
                             </div>

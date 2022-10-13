@@ -51,7 +51,7 @@ if (isset($_POST["registrasi"])) {
                     </div>
                     <div class="mt-3 d-grid justify-content-center">
                         <span>have an account already?</span>
-                        <a href="index.php" class="d-grid justify-content-center">Sign In</a>
+                        <a href="login.php" class="d-grid justify-content-center">Sign In</a>
                     </div>
                 </div>
             </form>

@@ -3,7 +3,12 @@ session_start();
 require_once 'utilities.php';
 
 if (isset($_POST["post"])) {
-    if (postingan($_POST) > 0) {
+    if (!isset($_SESSION["login"])) {
+        echo "<script>
+        alert('Login Dulu Brooo');
+        document.location.href = 'index.php';
+        </script>";
+    } else if (postingan($_POST) > 0) {
         echo "<script>
                 alert('Data telah ditambahkan');
                 document.location.href = 'index.php';
@@ -34,7 +39,7 @@ $tanggal = date("d M Y");
         <div id="navbar" class="navbar fixed-top d-flex justify-content-between">
             <div class="container">
                 <div>
-                    <a href="index.php">
+                    <a style="text-decoration:none;color:#000000" href="index.php">
                         <iconify-icon icon="akar-icons:arrow-back-thick-fill" width="30" height="30"></iconify-icon>
                     </a>
                 </div>

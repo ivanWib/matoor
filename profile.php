@@ -12,7 +12,7 @@ if (isset($_SESSION["login"])) {
         "id_user" => 0
     );
 }
-$add = query("SELECT * FROM posts");
+$add = query("SELECT * FROM posts WHERE id_user = $_SESSION[id_user]");
 
 ?>
 
@@ -37,22 +37,22 @@ $add = query("SELECT * FROM posts");
         <div id="navbar" class="navbar fixed-top d-flex justify-content-between">
             <div class="container d-flex justify-content-end gap-4">
                 <div>
-                    <a class="d-flex" style="text-decoration:none; color:#C8CDD1" href="post.php">
-                        <iconify-icon class="d-flex align-items-center" icon="mingcute:send-plane-fill" width="30" height="30"></iconify-icon>
-                        <h4 class="mb-0">Matoor</h4>
+                    <a style="text-decoration:none; color:#C8CDD1" href="index.php">
+                        <iconify-icon icon="bxs:home-alt-2" width="30" height="30"></iconify-icon>
                     </a>
                 </div>
                 <?php if (!isset($_SESSION["login"])) { ?>
                 <div>
-                    <a class="d-flex" style="text-decoration:none; color:#F0F6FC" href="login.php">
+                    <a class="d-flex" style="text-decoration:none; color:#C8CDD1" href="login.php">
                         <iconify-icon class="d-flex align-items-center" icon="clarity:login-solid" width="30" height="30"></iconify-icon>
                         <h4 class="mb-0">Login</h4>
                     </a>
                 </div>
                 <?php } else { ?>
                     <div>
-                        <a class="d-flex" style="text-decoration:none" href="profile.php">
-                            <img class="card-img-top rounded-circle" style="width:40px" src="foto/<?= $data["foto"] ?>" alt="Card image cap">
+                        <a class="d-flex" style="text-decoration:none; color:#C8CDD1" href="logout.php">
+                            <iconify-icon class="d-flex align-items-center" icon="clarity:logout-solid" width="30" height="30"></iconify-icon>
+                            <h4 class="mb-0">Logout</h4>
                         </a>
                     </div>
                 <?php } ?>
@@ -73,22 +73,21 @@ $add = query("SELECT * FROM posts");
                             <a style="text-decoration:none; color:#C8CDD1" href="edit_profile.php?id=<?= $data['id_user'] ?>">Edit Profile</a>
                         </div>
                         <?php } ?>
-
                     </div>
                 </div>
                 <div id="DASHBOARD" style="width:90%" class="d-flex justify-content-end" style="width:500px">
                     <div id="bungkus" class="w-50">
                         <div style="color:#C8CDD1" class="d-flex justify-content-center mt-5">
-                            <h1>DASHBOARD</h1>
+                            <h1>Your Matoor (<?= count($add) ?>)</h1>
                         </div>
                         <?php foreach ($add as $row) :
                             $user = query("SELECT * FROM users WHERE id_user = " . $row["id_user"])[0];
                             $like = query("SELECT COUNT(id_user) 'likes' FROM likes_post WHERE id_post = " . $row["id_post"])[0];
                             $comment = query("SELECT COUNT(id_post) 'comments' FROM comments WHERE id_post = " . $row["id_post"])[0];
                         ?>
-                        <div  class="column">
+                        <div class="column">
                             <div style="background-color:#161B22" class="card mb-4 shadow p-3 mb-3">
-                                <div  class="media d-flex flex-wrap align-items-center justify-content-between">
+                                <div class="media d-flex flex-wrap align-items-center justify-content-between">
                                     <div style="color:#C8CDD1" class="justify-content-between d-flex flex-wrap align-items-center gap-3">
                                         <img src="foto/<?= $user["foto"] ?>" alt="foto" class="d-block rounded-circle"
                                             width=60>
