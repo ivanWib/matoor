@@ -2,8 +2,6 @@
 session_start();
 require 'utilities.php';
 
-
-
 if (isset($_POST["comment"])) {
     if (!isset($_SESSION["login"])) {
         echo "<script>
@@ -17,7 +15,7 @@ if (isset($_POST["comment"])) {
     } else {
         echo mysqli_error($connect);
     }
-    $_POST["content"] = "";
+    $_POST["content"] === "";
 }
 
 $tanggal = date("d M Y");
@@ -41,12 +39,12 @@ $addcomment = query("SELECT * FROM comments WHERE id_post = $id");
     <title>Comment</title>
 </head>
 
-<body>
+<body style="background-color:#010409">
     <div id="BUNGKUS" class="container d-flex flex-column align-items-center">
         <div id="navbar" class="navbar fixed-top d-flex justify-content-between">
             <div class="container">
                 <div>
-                    <a style="text-decoration:none;color:#000000" href="index.php">
+                    <a style="text-decoration:none; color:#C8CDD1" href="index.php">
                         <iconify-icon icon="akar-icons:arrow-back-thick-fill" width="30" height="30"></iconify-icon>
                     </a>
                 </div>
@@ -54,7 +52,7 @@ $addcomment = query("SELECT * FROM comments WHERE id_post = $id");
         </div>
         <div id="CONTENT" class="mt-5">
             <div id="POSTINGAN" class="d-flex flex-column align-items-center">
-                <div class="mt-4 card p-4 overflow-auto" style="width:650px; height:580px; border-radius:20px;">
+                <div class="mt-4 card p-4 overflow-auto" style="width:650px; height:580px; border-radius:20px; background-color:#21262D; color:#C8CDD1">
                     <div class="d-flex">
                         <img style="width:50px" class="card-img-top rounded-circle" src="foto/<?= $user[0]["foto"] ?>"
                             alt="foto" />
@@ -63,12 +61,12 @@ $addcomment = query("SELECT * FROM comments WHERE id_post = $id");
                         </div>
                     </div>
                     <div class="mt-3 d-flex flex-column">
-                        <div class="card p-3 shadow p-3 mb-3 bg-body" style="border-radius:15px;">
+                        <div class="card p-3 shadow p-3 mb-3 bg-body" style="border-radius:15px; background-color:#C8CDD1 ;color:#000000">
                             <p class="mb-0"><?= $add[0]["content"]; ?></p>
                             <p style="color:#0000FF" class="text-uppercase mb-0">#<?= $add[0]["category"]; ?></p>
                         </div>
                         <div class="d-flex align-items-center ml-2 mt-2">
-                            <a style="text-decoration:none;color:#000000" class="d-flex align-items-center" href="like_post2.php?id=<?= $add[0]["id_post"] ?>&post_id=<?= $id ?>">
+                            <a style="text-decoration:none;color:#C8CDD1" class="d-flex align-items-center" href="like_post2.php?id=<?= $add[0]["id_post"] ?>&post_id=<?= $id ?>">
                                 <iconify-icon icon="fontisto:like" width="20" height="20"></iconify-icon>
                             </a>
                             <p style="font-size:15px" class="mb-0 ml-2"><?= $like[0]["likes"] ?></p>
@@ -83,8 +81,7 @@ $addcomment = query("SELECT * FROM comments WHERE id_post = $id");
                             <input type="hidden" name="id" value="<?= $id ?>">
                             <input type="hidden" name="tanggal" value="<?= $tanggal ?>">
                             <div class="form-group p-1">
-                                <textarea class="form-control mt-3" style="border-radius:10px" name="content"
-                                    placeholder="Reply Your Matoor"></textarea>
+                                <textarea style="border-radius:15px; background-color:#C8CDD1 ;color:#000000" class="form-control mt-3" style="border-radius:10px" name="content" placeholder="Reply Your Matoor"></textarea>
                                 <button type="submit" class="btn btn-primary mt-2" style="border-radius:10px"
                                     name="comment">Post</button>
                             </div>
@@ -96,22 +93,22 @@ $addcomment = query("SELECT * FROM comments WHERE id_post = $id");
                             $like = query("SELECT COUNT(id_user) 'likes' FROM likes_comment WHERE id_comment = " . $row["id_comment"])[0];
                         ?>
                         <div class="column">
-                            <div class="card mb-4 shadow p-3 mb-3 bg-body">
+                            <div style="border-radius:15px; background-color:#161B22" class="card mb-4 shadow p-3 mb-3">
                                 <div class="media d-flex flex-wrap align-items-center justify-content-between">
                                     <div class="justify-content-between d-flex flex-wrap align-items-center gap-3">
                                         <img src="foto/<?= $user["foto"] ?>" alt="foto" style="width:50px" class="d-block rounded-circle"/>
                                         <h5 class="mb-0 ml-3"><?= $user["username"] ?></h5>
                                     </div>
                                 </div>
-                                <div class="card p-2 mt-2">
+                                <div style="color:#000000; background-color:#C8CDD1; border-radius:15px" class="card p-2 mt-2">
                                     <p class="mb-0"><?= $row["content"]; ?></p>
                                 </div>
                                 <div>
                                     <p style="font-size:12px" class="mb-0 mt-2"><?= $row["date"] ?></p>
                                 </div>
                                 <div class="d-flex flex-row justify-content-between align-items-center mt-2">
-                                    <div class="px-2 pt-2 d-flex gap-2">
-                                        <a style="text-decoration:none;color:#000000" href="like_comment.php?id=<?= $row["id_comment"] ?>&post_id=<?= $id ?>">
+                                    <div style="color:#C8CDD1" class="px-2 pt-2 d-flex gap-2">
+                                        <a style="text-decoration:none; color:#C8CDD1" href="like_comment.php?id=<?= $row["id_comment"] ?>&post_id=<?= $id ?>">
                                         <iconify-icon icon="fontisto:like" width="20" height="20"></iconify-icon>
                                         </a>
                                         <p style="font-size:15px" class="mb-0 ml-2"><?= $like["likes"] ?></p>

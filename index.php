@@ -61,7 +61,7 @@ $add = query("SELECT * FROM posts");
         <div id="body" style="height:570px; width:1200px; margin-top:80px; background-color:#21262D; color:#F9F8F8" class="card overflow-auto">
             <div id="content" class="d-flex flex-row w-100">
                 <div id="PROFILE" class="w-25 d-flex justify-content-center position-fixed">
-                    <div style="height:350px; background-color:#161B22; color:#C8CDD1" class="w-75 mt-5 card d-flex flex-column align-items-center shadow p-3 mb-3">
+                    <div style="height:350px; background-color:#161B22; color:#C8CDD1; margin-top:110px" class="w-75 card d-flex flex-column align-items-center shadow p-3 mb-3">
                         <img class="card-img-top rounded-circle mt-3" style="width:100px"
                             src="foto/<?= $data["foto"] ?>" alt="Card image cap">
                         <div class="card-body">

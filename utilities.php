@@ -176,5 +176,6 @@ function comment($add)
 
     $query = "INSERT INTO comments VALUES ('', '$id_post', '$id_user', '$comment', '$date')";
     mysqli_query($connect, $query);
+    $_POST["content"] === "";
     return mysqli_affected_rows($connect);
 }

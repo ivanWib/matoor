@@ -38,8 +38,8 @@ if (isset($_POST["login"])) {
     <title>Login</title>
 </head>
 
-<body class="d-flex mt-5 justify-content-center">
-    <div class="card" style=" width: 18rem;">
+<body style="background-color:#010409" class="d-flex mt-5 justify-content-center">
+    <div class="card" style="background-color:#C8CDD1; border-radius:15px; width: 18rem;">
         <img src="https://cdn.discordapp.com/attachments/1028895661753651332/1028940958928216065/Untitled_design.png" class="card-img-top" alt="">
         <div class="card-body">
             <form action="" method="post">
@@ -59,6 +59,10 @@ if (isset($_POST["login"])) {
                     <div class="mt-3 d-grid justify-content-center">
                         <span>Don't have an account?</span>
                         <a href="register.php" class="d-grid justify-content-center">Register Now!</a>
+                    </div>
+                    <div class="mt-1 d-grid justify-content-center">
+                        <span>Login as a guest?</span>
+                        <a href="index.php" class="d-grid justify-content-center">Click Here!</a>
                     </div>
                 </div>
             </form>

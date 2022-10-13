@@ -28,8 +28,8 @@ if (isset($_POST["registrasi"])) {
     <title>Register</title>
 </head>
 
-<body class="d-flex mt-3 justify-content-center">
-    <div class="card" style="width: 18rem;">
+<body style="background-color:#010409" class="d-flex mt-3 justify-content-center">
+    <div class="card" style="background-color:#C8CDD1; border-radius:15px; width: 18rem; margin-top:50px">
         <img src="https://cdn.discordapp.com/attachments/1028895661753651332/1028940958928216065/Untitled_design.png" class="card-img-top" alt="">
         <div class="card-body">
             <form action="" method="post">
