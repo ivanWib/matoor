@@ -20,10 +20,6 @@ foreach ($result as $row) {
     $add[] = query("SELECT * FROM posts WHERE id_post = $row[id_post]")[0];
 }
 
-
-
-
-
 // $add = query("SELECT * FROM posts");
 
 ?>
@@ -85,7 +81,7 @@ foreach ($result as $row) {
                 </div>
                 <?php } else { ?>
                 <div>
-                    <a class="d-flex" style="text-decoration:none" href="profile.php">
+                    <a class="d-flex" style="text-decoration:none" href="profile.php?id=<?= $_SESSION["id_user"] ?>">
                         <img class="card-img-top rounded-circle" style="width:40px" src="foto/<?= $data["foto"] ?>"
                             alt="Card image cap">
                     </a>
@@ -128,11 +124,11 @@ foreach ($result as $row) {
                         <div class="column">
                             <div style="background-color:#161B22" class="card mb-4 shadow p-3 mb-3">
                                 <div class="media d-flex flex-wrap align-items-center justify-content-between">
-                                    <div style="color:#C8CDD1"
-                                        class="justify-content-between d-flex flex-wrap align-items-center gap-3">
-                                        <img src="foto/<?= $user["foto"] ?>" alt="foto" class="d-block rounded-circle"
-                                            width=60>
-                                        <h5><?= $user["username"] ?></h5>
+                                    <div style="color:#C8CDD1" class="justify-content-between d-flex flex-wrap align-items-center gap-3">
+                                        <a style="text-decoration:none; color:#C8CDD1" class="justify-content-between d-flex flex-wrap align-items-center gap-3" href="profile.php?id=<?= $user["id_user"] ?>">
+                                            <img src="foto/<?= $user["foto"] ?>" alt="foto" class="d-block rounded-circle" width=60 />
+                                            <h5><?= $user["username"] ?></h5>
+                                        </a>
                                     </div>
                                     <div style="color:#C8CDD1" class="medium ml-3">
                                         <strong>Category: </strong>
@@ -148,7 +144,7 @@ foreach ($result as $row) {
                                 <div class="d-flex flex-row justify-content-between align-items-center mt-2">
                                     <div style="color:#C8CDD1" class="px-2 pt-2 d-flex gap-2">
                                         <a style="text-decoration:none; color:#C8CDD1"
-                                            href="like_post.php?id=<?= $row["id_post"] ?>">
+                                            href="like.php?id=<?= $row["id_post"] ?>&header=index">
                                             <iconify-icon icon="fontisto:like" width="20" height="20"></iconify-icon>
                                         </a>
                                         <p style="font-size:15px" class="mb-0 ml-2"><?= $like["likes"] ?></p>

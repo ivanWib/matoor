@@ -105,7 +105,7 @@ if ($category == "all") {
                                 </div>
                                 <div class="d-flex flex-row justify-content-between align-items-center mt-2">
                                     <div style="color:#C8CDD1" class="px-2 pt-2 d-flex gap-2">
-                                        <a style="text-decoration:none; color:#C8CDD1" href="like_post3.php?id=<?= $row["id_post"] ?>&category=<?= $row["category"] ?>">
+                                        <a style="text-decoration:none; color:#C8CDD1" href="like.php?id=<?= $row["id_post"] ?>&category=<?= $row["category"] ?>&header=category">
                                             <iconify-icon icon="fontisto:like" width="20" height="20"></iconify-icon>
                                         </a>
                                         <p style="font-size:15px" class="mb-0 ml-2"><?= $like["likes"] ?></p>

@@ -2,8 +2,10 @@
 session_start();
 require "utilities.php";
 
-if (isset($_SESSION["login"])) {
-    $data = query("SELECT * FROM users WHERE id_user = $_SESSION[id_user]")[0];
+$id = $_GET["id"];
+if (isset($id)) {
+    
+    $data = query("SELECT * FROM users WHERE id_user = $id")[0];
 } else {
     $data = array(
         "foto" => "default.png",
@@ -12,7 +14,8 @@ if (isset($_SESSION["login"])) {
         "id_user" => 0
     );
 }
-$add = query("SELECT * FROM posts WHERE id_user = $_SESSION[id_user]");
+
+$add = query("SELECT * FROM posts WHERE id_user = $id");
 
 ?>
 
@@ -67,6 +70,7 @@ $add = query("SELECT * FROM posts WHERE id_user = $_SESSION[id_user]");
                         <div class="card-body">
                             <h3 class="card-title text-center"><?= $data["username"]; ?></h3>
                             <h5 class="card-title text-center"><?= $data["nama_lengkap"]; ?></h5>
+                            <h5 class="card-title text-center"><?= $data["email"]; ?></h5>
                         </div>
                         <?php if (isset($_SESSION["login"])) { ?>
                         <div class="card-body">

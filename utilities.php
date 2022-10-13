@@ -176,7 +176,7 @@ function comment($add)
 
     $query = "INSERT INTO comments VALUES ('', '$id_post', '$id_user', '$comment', '$date')";
     mysqli_query($connect, $query);
-    $_POST["content"] === "";
+    // $_POST["content"] === "";
     return mysqli_affected_rows($connect);
 }
 
@@ -203,6 +203,7 @@ function forgot_password($data)
         } else {
             echo "<script>
                 alert('Email tidak terdaftar!');
+                document.location.href = 'forgot_password.php';
             </script>";
         }
     }

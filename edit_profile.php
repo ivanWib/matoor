@@ -41,27 +41,45 @@ if (isset($_POST["change"])) {
     <title>Profile</title>
 </head>
 
-<body>
-    <h1>Edit Profile</h1>
-
-    <div>
-        <form action="" method="POST" enctype="multipart/form-data">
-            <input type="hidden" name="foto_lama" value="<?= $data["foto"] ?>">
-            <img src="foto/<?= $data["foto"]; ?>" alt="foto" width="100" />
-            <br>
-            <input class="mt-2" type="file" name="foto" value="<?= $data["foto"]; ?>">
-            <br>
-            <br>
-            <input type="text" name="username" value="<?= $data["username"]; ?>" />
-            <br>
-            <input type="text" name="namalengkap" placeholder="Nama Lengkap" value="<?= $data["nama_lengkap"]; ?>" />
-            <br>
-            <input type="text" name="email" value="<?= $data["email"]; ?>" />
-            <br>
-            <button class="mt-2" type="submit" name="change">Change</button>
-        </form>
+<body style="background-color:#010409" class="d-flex justify-content-center">
+    <div id="BUNGKUS" class="container d-flex flex-column align-items-center">
+        <div id="navbar" class="navbar fixed-top d-flex justify-content-between">
+            <div class="container">
+                <div>
+                    <a style="text-decoration:none; color:#C8CDD1" href="index.php">
+                        <iconify-icon icon="akar-icons:arrow-back-thick-fill" width="30" height="30"></iconify-icon>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="card d-flex justify-content-center position-absolute top-50 start-50 translate-middle " style="background-color:#C8CDD1; border-radius:15px; width: 18rem">
+            <img class="card-img-top rounded-circle mt-3 mx-auto" style="width:100px" src="foto/<?= $data["foto"] ?>" alt="Card image cap">
+            <div class="p-4" style="background-color:#C8CDD1">
+                <form action="" method="post" enctype="multipart/form-data">
+                    <div>
+                        <input type="hidden" name="foto_lama" value="<?= $data["foto"] ?>">
+                        <div class="form-group mt-1">
+                            <input class="mt-2 form-control" type="file" name="foto" value="<?= $data["foto"]; ?>">
+                        </div>
+                        <div class="form-group mt-2">
+                            <input type="text" class="form-control" name="username" value="<?= $data["username"]; ?>" />
+                        </div>
+                        <div class="form-group mt-2">
+                            <input type="text" class="form-control" name="namalengkap" placeholder="Nama Lengkap" value="<?= $data["nama_lengkap"]; ?>" />
+                        </div>
+                        <div class="form-group mt-2">
+                        <input type="email" class="form-control" name="email" value="<?= $data["email"]; ?>" />
+                        </div>
+                        <div class="form-group ">
+                            <button type="submit" name="submit" class="btn btn-primary mt-4 d-grid justify-content-center w-100">Save</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 
+    <script src="https://code.iconify.design/iconify-icon/1.0.1/iconify-icon.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
         integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
     </script>

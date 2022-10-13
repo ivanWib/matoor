@@ -25,7 +25,6 @@ if (isset($_POST["submit"])) {
         <label for="pass">Password Baru</label>
         <input type="password" name="password" id="pass">
         <button type="submit" name="submit">Submit</button>
-
     </form>
 
 </body>

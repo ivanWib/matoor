@@ -2,22 +2,6 @@
 session_start();
 require 'utilities.php';
 
-if (isset($_POST["comment"])) {
-    if (!isset($_SESSION["login"])) {
-        echo "<script>
-        alert('Login Dulu Brooo');
-        document.location.href = 'index.php';
-        </script>";
-    } else if ($_POST["content"] === "") {
-        
-    } else if (comment($_POST) > 0) {
-        
-    } else {
-        echo mysqli_error($connect);
-    }
-    $_POST["content"] === "";
-}
-
 $tanggal = date("d M Y");
 $id = $_GET["id"];
 $add = query("SELECT * FROM posts WHERE id_post = $id");
@@ -77,13 +61,15 @@ $addcomment = query("SELECT * FROM comments WHERE id_post = $id");
                         </div>
                     </div>
                     <div id="COMMENT INPUT">
-                        <form action="" method="post">
+                        <form action="comment_proses.php" method="post">
+                            <input type="hidden" name="post_id" value="<?= $_GET['id'] ?>">
                             <input type="hidden" name="id" value="<?= $id ?>">
                             <input type="hidden" name="tanggal" value="<?= $tanggal ?>">
                             <div class="form-group p-1">
                                 <textarea style="border-radius:15px; background-color:#C8CDD1 ;color:#000000" class="form-control mt-3" style="border-radius:10px" name="content" placeholder="Reply Your Matoor"></textarea>
-                                <button type="submit" class="btn btn-primary mt-2" style="border-radius:10px"
-                                    name="comment">Post</button>
+                                <button type="submit" class="btn btn-primary mt-2" style="border-radius:10px" name="comment">
+                                    Post
+                                </button>
                             </div>
                         </form>
                     </div>
@@ -108,8 +94,8 @@ $addcomment = query("SELECT * FROM comments WHERE id_post = $id");
                                 </div>
                                 <div class="d-flex flex-row justify-content-between align-items-center mt-2">
                                     <div style="color:#C8CDD1" class="px-2 pt-2 d-flex gap-2">
-                                        <a style="text-decoration:none; color:#C8CDD1" href="like_comment.php?id=<?= $row["id_comment"] ?>&post_id=<?= $id ?>">
-                                        <iconify-icon icon="fontisto:like" width="20" height="20"></iconify-icon>
+                                        <a style="text-decoration:none; color:#C8CDD1" href="like_comment.php?id=<?= $row["id_comment"] ?>&post_id=<?= $id ?>&header=comment">
+                                            <iconify-icon icon="fontisto:like" width="20" height="20"></iconify-icon>
                                         </a>
                                         <p style="font-size:15px" class="mb-0 ml-2"><?= $like["likes"] ?></p>
                                     </div>
