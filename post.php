@@ -59,10 +59,10 @@ $tanggal = date("d M Y");
                             <select class="form-control" name="category" required>
                                 <option value=""> -- Topic -- </option>
                                 <option value="php">PHP</option>
-                                <option value="python">PYTHON</option>
-                                <option value="javascript">JAVASCRIPT</option>
-                                <option value="c++">C++</option>
-                                <option value="c#">C#</option>
+                                <option value="python">Python</option>
+                                <option value="javascript">Javascript</option>
+                                <option value="c">C</option>
+                                <option value="java">Java</option>
                             </select>
                         </div>
                         <div class="form-group">

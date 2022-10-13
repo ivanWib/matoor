@@ -36,6 +36,26 @@ $add = query("SELECT * FROM posts");
     <div id="container" class="d-flex flex-column align-items-center">
         <div id="navbar" class="navbar fixed-top d-flex justify-content-between">
             <div class="container d-flex justify-content-end gap-4">
+                <a class="d-flex" style="text-decoration:none; color:#F0F6FC" href="category.php?category=php">
+                    <h4 class="mb-0">PHP</h4>
+                    <iconify-icon icon="charm:link-external" width="20" height="20"></iconify-icon>
+                </a>
+                <a class="d-flex" style="text-decoration:none; color:#F0F6FC" href="category.php?category=python">
+                    <h4 class="mb-0">PYTHON</h4>
+                    <iconify-icon icon="charm:link-external" width="20" height="20"></iconify-icon>
+                </a>
+                <a class="d-flex" style="text-decoration:none; color:#F0F6FC" href="category.php?category=javascript">
+                    <h4 class="mb-0">JAVASCRIPT</h4>
+                    <iconify-icon icon="charm:link-external" width="20" height="20"></iconify-icon>
+                </a>
+                <a class="d-flex" style="text-decoration:none; color:#F0F6FC" href="category.php?category=c">
+                    <h4 class="mb-0">C</h4>
+                    <iconify-icon icon="charm:link-external" width="20" height="20"></iconify-icon>
+                </a>
+                <a class="d-flex" style="text-decoration:none; color:#F0F6FC" href="category.php?category=java">
+                    <h4 class="mb-0">Java</h4>
+                    <iconify-icon icon="charm:link-external" width="20" height="20"></iconify-icon>
+                </a>
                 <div>
                     <a class="d-flex" style="text-decoration:none; color:#C8CDD1" href="post.php">
                         <iconify-icon class="d-flex align-items-center" icon="mingcute:send-plane-fill" width="30" height="30"></iconify-icon>
@@ -44,7 +64,7 @@ $add = query("SELECT * FROM posts");
                 </div>
                 <?php if (!isset($_SESSION["login"])) { ?>
                 <div>
-                    <a class="d-flex" style="text-decoration:none; color:#F0F6FC" href="login.php">
+                    <a class="d-flex" style="text-decoration:none; color:#C8CDD1" href="login.php">
                         <iconify-icon class="d-flex align-items-center" icon="clarity:login-solid" width="30" height="30"></iconify-icon>
                         <h4 class="mb-0">Login</h4>
                     </a>
