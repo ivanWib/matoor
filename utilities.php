@@ -179,3 +179,31 @@ function comment($add)
     $_POST["content"] === "";
     return mysqli_affected_rows($connect);
 }
+
+function forgot_password($data)
+{
+
+    global $connect;
+    $email = $data["email"];
+    $password = $data["password"];
+    $query = "SELECT * FROM users WHERE email = '$email'";
+
+    $result = mysqli_query($connect, $query);
+
+    foreach ($result as $row) {
+        if ($email == $row["email"]) {
+            $password = password_hash($password, PASSWORD_BCRYPT);
+            $query = "UPDATE users SET password = '$password' WHERE email = '$email'";
+            mysqli_query($connect, $query);
+            echo "<script>
+                    alert('Password berhasil diubah!');
+                    document.location.href = 'login.php';
+                </script>";
+            return mysqli_affected_rows($connect);
+        } else {
+            echo "<script>
+                alert('Email tidak terdaftar!');
+            </script>";
+        }
+    }
+}

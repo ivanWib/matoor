@@ -12,7 +12,19 @@ if (isset($_SESSION["login"])) {
         "id_user" => 0
     );
 }
-$add = query("SELECT * FROM posts");
+
+$result = query("SELECT id_post, (SELECT COUNT(*) FROM likes_post WHERE id_post = posts.id_post) * 0.3 + (SELECT COUNT(*) FROM comments WHERE id_post = posts.id_post) * 0.7 AS score FROM posts ORDER BY score DESC");
+
+$add = array();
+foreach ($result as $row) {
+    $add[] = query("SELECT * FROM posts WHERE id_post = $row[id_post]")[0];
+}
+
+
+
+
+
+// $add = query("SELECT * FROM posts");
 
 ?>
 
@@ -58,30 +70,35 @@ $add = query("SELECT * FROM posts");
                 </a>
                 <div>
                     <a class="d-flex" style="text-decoration:none; color:#C8CDD1" href="post.php">
-                        <iconify-icon class="d-flex align-items-center" icon="mingcute:send-plane-fill" width="30" height="30"></iconify-icon>
+                        <iconify-icon class="d-flex align-items-center" icon="mingcute:send-plane-fill" width="30"
+                            height="30"></iconify-icon>
                         <h4 class="mb-0">Matoor</h4>
                     </a>
                 </div>
                 <?php if (!isset($_SESSION["login"])) { ?>
                 <div>
                     <a class="d-flex" style="text-decoration:none; color:#C8CDD1" href="login.php">
-                        <iconify-icon class="d-flex align-items-center" icon="clarity:login-solid" width="30" height="30"></iconify-icon>
+                        <iconify-icon class="d-flex align-items-center" icon="clarity:login-solid" width="30"
+                            height="30"></iconify-icon>
                         <h4 class="mb-0">Login</h4>
                     </a>
                 </div>
                 <?php } else { ?>
-                    <div>
-                        <a class="d-flex" style="text-decoration:none" href="profile.php">
-                            <img class="card-img-top rounded-circle" style="width:40px" src="foto/<?= $data["foto"] ?>" alt="Card image cap">
-                        </a>
-                    </div>
+                <div>
+                    <a class="d-flex" style="text-decoration:none" href="profile.php">
+                        <img class="card-img-top rounded-circle" style="width:40px" src="foto/<?= $data["foto"] ?>"
+                            alt="Card image cap">
+                    </a>
+                </div>
                 <?php } ?>
             </div>
         </div>
-        <div id="body" style="height:570px; width:1200px; margin-top:80px; background-color:#21262D; color:#F9F8F8" class="card overflow-auto">
+        <div id="body" style="height:570px; width:1200px; margin-top:80px; background-color:#21262D; color:#F9F8F8"
+            class="card overflow-auto">
             <div id="content" class="d-flex flex-row w-100">
                 <div id="PROFILE" class="w-25 d-flex justify-content-center position-fixed">
-                    <div style="height:350px; background-color:#161B22; color:#C8CDD1; margin-top:110px" class="w-75 card d-flex flex-column align-items-center shadow p-3 mb-3">
+                    <div style="height:350px; background-color:#161B22; color:#C8CDD1; margin-top:110px"
+                        class="w-75 card d-flex flex-column align-items-center shadow p-3 mb-3">
                         <img class="card-img-top rounded-circle mt-3" style="width:100px"
                             src="foto/<?= $data["foto"] ?>" alt="Card image cap">
                         <div class="card-body">
@@ -90,7 +107,8 @@ $add = query("SELECT * FROM posts");
                         </div>
                         <?php if (isset($_SESSION["login"])) { ?>
                         <div class="card-body">
-                            <a style="text-decoration:none; color:#C8CDD1" href="edit_profile.php?id=<?= $data['id_user'] ?>">Edit Profile</a>
+                            <a style="text-decoration:none; color:#C8CDD1"
+                                href="edit_profile.php?id=<?= $data['id_user'] ?>">Edit Profile</a>
                         </div>
                         <?php } ?>
 
@@ -102,14 +120,16 @@ $add = query("SELECT * FROM posts");
                             <h1>DASHBOARD</h1>
                         </div>
                         <?php foreach ($add as $row) :
-                            $user = query("SELECT * FROM users WHERE id_user = " . $row["id_user"])[0];
-                            $like = query("SELECT COUNT(id_user) 'likes' FROM likes_post WHERE id_post = " . $row["id_post"])[0];
-                            $comment = query("SELECT COUNT(id_post) 'comments' FROM comments WHERE id_post = " . $row["id_post"])[0];
+                            $data = query("SELECT * FROM posts WHERE id_post = $row[id_post]")[0];
+                            $user = query("SELECT * FROM users WHERE id_user = " . $data["id_user"])[0];
+                            $like = query("SELECT COUNT(id_user) 'likes' FROM likes_post WHERE id_post = " . $data["id_post"])[0];
+                            $comment = query("SELECT COUNT(id_post) 'comments' FROM comments WHERE id_post = " . $data["id_post"])[0];
                         ?>
-                        <div  class="column">
+                        <div class="column">
                             <div style="background-color:#161B22" class="card mb-4 shadow p-3 mb-3">
-                                <div  class="media d-flex flex-wrap align-items-center justify-content-between">
-                                    <div style="color:#C8CDD1" class="justify-content-between d-flex flex-wrap align-items-center gap-3">
+                                <div class="media d-flex flex-wrap align-items-center justify-content-between">
+                                    <div style="color:#C8CDD1"
+                                        class="justify-content-between d-flex flex-wrap align-items-center gap-3">
                                         <img src="foto/<?= $user["foto"] ?>" alt="foto" class="d-block rounded-circle"
                                             width=60>
                                         <h5><?= $user["username"] ?></h5>
@@ -127,13 +147,15 @@ $add = query("SELECT * FROM posts");
                                 </div>
                                 <div class="d-flex flex-row justify-content-between align-items-center mt-2">
                                     <div style="color:#C8CDD1" class="px-2 pt-2 d-flex gap-2">
-                                        <a style="text-decoration:none; color:#C8CDD1" href="like_post.php?id=<?= $row["id_post"] ?>">
+                                        <a style="text-decoration:none; color:#C8CDD1"
+                                            href="like_post.php?id=<?= $row["id_post"] ?>">
                                             <iconify-icon icon="fontisto:like" width="20" height="20"></iconify-icon>
                                         </a>
                                         <p style="font-size:15px" class="mb-0 ml-2"><?= $like["likes"] ?></p>
                                     </div>
                                     <div style="color:#C8CDD1" class="px-2 pt-2 d-flex gap-2">
-                                        <a style="text-decoration:none; color:#C8CDD1" href="comment.php?id=<?= $row["id_post"] ?>">
+                                        <a style="text-decoration:none; color:#C8CDD1"
+                                            href="comment.php?id=<?= $row["id_post"] ?>">
                                             <iconify-icon icon="heroicons:chat-bubble-oval-left-ellipsis-solid"
                                                 width="20" height="20"></iconify-icon>
                                         </a>
