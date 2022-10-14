@@ -48,27 +48,35 @@ $tanggal = date("d M Y");
                 </div>
             </div>
         </div>
-        <div class="w-25 card d-flex justify-content-center position-absolute top-50 start-50 translate-middle" style="background-color:#C8CDD1; border-radius:15px; width: 18rem;">
+        <div class="w-25 card d-flex justify-content-center position-absolute top-50 start-50 translate-middle"
+            style="background-color:#C8CDD1; border-radius:15px; width: 18rem;">
             <img src="foto/banner.png" class="card-img-top" alt="...">
             <div class="p-4">
                 <form action="" method="post">
                     <input type="hidden" name="tanggal" value="<?= $tanggal ?>">
                     <div class="form-group p-1">
-                        <textarea class="form-control mt-3" style="border-radius:10px" name="content" placeholder="Post Your Matoor"></textarea>
+                        <textarea class="form-control mt-3" style="border-radius:10px" name="content"
+                            placeholder="Post Your Matoor"></textarea>
                     </div>
-                    <div  class="form-group p-1">
+                    <div class="form-group p-1">
                         <label for="nama-category">Topic</label>
                         <select class="form-control" name="category" required>
                             <option value=""> -- Topic -- </option>
                             <option value="php">PHP</option>
                             <option value="python">Python</option>
-                            <option value="javascript">Javascript</option>
+                            <option value="javascript">R</option>
                             <option value="c">C</option>
                             <option value="java">Java</option>
+                            <option value="sql">SQL</option>
+                            <option value="kotlin">Kotlin</option>
+                            <option value="prolog">Prolog</option>
+                            <option value="ruby">Ruby</option>
+                            <option value="jaksel script">Jaksel Script</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <button type="submit" class="btn btn-primary mt-2 d-grid justify-content-center w-100" style="border-radius:10px" name="post">
+                        <button type="submit" class="btn btn-primary mt-2 d-grid justify-content-center w-100"
+                            style="border-radius:10px" name="post">
                             Post
                         </button>
                     </div>

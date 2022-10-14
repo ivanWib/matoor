@@ -8,6 +8,12 @@ if (isset($_GET["id"])) {
     $table = $_GET["table"];
     $category = $_GET["data"];
 
+    // var_dump($id_post);
+    // var_dump($header);
+    // var_dump($table);
+    // var_dump($category);
+    // die;
+
     if ($header == "index" or $header == "category") {
         $query = "DELETE FROM $table WHERE id_post = $id_post";
         mysqli_query($connect, $query);
@@ -31,6 +37,14 @@ if (isset($_GET["id"])) {
         echo "<script>
             alert('Comment deleted successfully');
             document.location.href = 'comment.php?id=$category';
+        </script>";
+    } else if ($header == "profile") {
+        $query = "DELETE FROM $table WHERE id_user = $id_post";
+        mysqli_query($connect, $query);
+        // header("Location:" . $header . ".php?id=" . $category);
+        echo "<script>
+            alert('User deleted successfully');
+            document.location.href = 'index.php';
         </script>";
     }
 }

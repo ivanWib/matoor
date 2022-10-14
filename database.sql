@@ -20,14 +20,14 @@ CREATE TABLE posts (
   content   TEXT NOT NULL,
   date      VARCHAR(20) NOT NULL,
   PRIMARY   KEY (id_post),
-  FOREIGN   KEY (id_user) REFERENCES users(id_user)
+  FOREIGN   KEY (id_user) REFERENCES users(id_user) ON DELETE CASCADE
 )engine=InnoDB;
 
 CREATE TABLE likes_post (
   id_post   INT NOT NULL,
   id_user   INT NOT NULL,
-  FOREIGN KEY (id_post) REFERENCES posts(id_post),
-  FOREIGN KEY (id_user) REFERENCES users(id_user)
+  FOREIGN KEY (id_post) REFERENCES posts(id_post) ON DELETE CASCADE,
+  FOREIGN KEY (id_user) REFERENCES users(id_user) ON DELETE CASCADE
 )engine=InnoDB;
 
 CREATE TABLE comments (
@@ -37,15 +37,15 @@ CREATE TABLE comments (
   content     TEXT NOT NULL,
   date        VARCHAR(20) NOT NULL,
   PRIMARY     KEY (id_comment),
-  FOREIGN     KEY (id_post) REFERENCES posts(id_post),
-  FOREIGN     KEY (id_user) REFERENCES users(id_user)
+  FOREIGN     KEY (id_post) REFERENCES posts(id_post) ON DELETE CASCADE,
+  FOREIGN     KEY (id_user) REFERENCES users(id_user) ON DELETE CASCADE
 )engine=InnoDB;
 
 CREATE TABLE likes_comment (
   id_comment  INT NOT NULL,
   id_user     INT NOT NULL,
-  FOREIGN KEY (id_comment) REFERENCES comments(id_comment),
-  FOREIGN KEY (id_user) REFERENCES users(id_user)
+  FOREIGN KEY (id_comment) REFERENCES comments(id_comment) ON DELETE CASCADE,
+  FOREIGN KEY (id_user) REFERENCES users(id_user) ON DELETE CASCADE
 )engine=InnoDB;
 
 INSERT INTO users (username, email, password, foto, status)

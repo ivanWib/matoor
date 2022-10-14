@@ -87,13 +87,34 @@ $add = query("SELECT * FROM posts WHERE id_user = $id");
                                 href="edit_profile.php?id=<?= $data['id_user'] ?>">Edit Profile</a>
                         </div>
                         <?php } ?>
-                        <?php if ($login == "1") { ?>
-                        <div>
-                            <a style="text-decoration:none; color:#C8CDD1" href="ban.php?id=<?= $id ?>">
-                                <iconify-icon icon="fa-solid:user-slash" width="30" height="30"></iconify-icon>
-                            </a>
+
+                        <!-- --- -->
+
+                        <div class="d-flex gap-5">
+
+                            <!-- <?php if ($login == "1") { ?>
+                            <div>
+                                <a style="text-decoration:none; color:#C8CDD1" href="ban.php?id=<?= $id ?>">
+                                    <iconify-icon icon="fa-solid:user-slash" width="30" height="30"></iconify-icon>
+                                </a>
+                            </div>
+                            <?php } ?> -->
+
+
+                            <?php if ($login == "1") { ?>
+                            <div>
+                                <a style="text-decoration:none; color:#C8CDD1"
+                                    href="delete.php?id=<?= $id ?>&header=profile&table=users&data=null">
+                                    <iconify-icon icon="fa-solid:user-slash" width="30" height="30"></iconify-icon>
+                                </a>
+                            </div>
+                            <?php } ?>
+
                         </div>
-                        <?php } ?>
+
+
+
+
                     </div>
                 </div>
                 <div id="DASHBOARD" style="width:90%" class="d-flex justify-content-end" style="width:500px">
