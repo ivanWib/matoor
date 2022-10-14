@@ -2,7 +2,11 @@
 session_start();
 require "utilities.php";
 
-$login = $_SESSION["id_user"];
+if (isset($_SESSION['login'])) {
+    $login = $_SESSION["id_user"];
+} else {
+    $login = 0;
+}
 
 $id = $_GET["id"];
 if (isset($id)) {
@@ -68,7 +72,7 @@ $add = query("SELECT * FROM posts WHERE id_user = $id");
             class="card overflow-auto">
             <div id="content" class="d-flex flex-row w-100">
                 <div id="PROFILE" class="w-25 d-flex justify-content-center position-fixed">
-                    <div style="height:350px; background-color:#161B22; color:#C8CDD1"
+                    <div style="height:380px; background-color:#161B22; color:#C8CDD1"
                         class="w-75 mt-5 card d-flex flex-column align-items-center shadow p-3 mb-3">
                         <img class="card-img-top rounded-circle mt-3" style="width:100px"
                             src="foto/<?= $data["foto"] ?>" alt="Card image cap">
@@ -77,13 +81,12 @@ $add = query("SELECT * FROM posts WHERE id_user = $id");
                             <h5 class="card-title text-center"><?= $data["nama_lengkap"]; ?></h5>
                             <h5 class="card-title text-center"><?= $data["email"]; ?></h5>
                         </div>
-                        <?php if (isset($_SESSION["login"])) { ?>
+                        <?php if ($login == $data["id_user"]) { ?>
                         <div class="card-body">
                             <a style="text-decoration:none; color:#C8CDD1"
                                 href="edit_profile.php?id=<?= $data['id_user'] ?>">Edit Profile</a>
                         </div>
                         <?php } ?>
-                        <!-- ban -->
                         <?php if ($login == "1") { ?>
                         <div>
                             <a style="text-decoration:none; color:#C8CDD1" href="ban.php?id=<?= $id ?>">

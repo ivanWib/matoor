@@ -31,24 +31,3 @@ if (isset($_GET["id"])) {
         }
     }
 }
-?>
-
-
-
-// $data = query("SELECT * FROM users WHERE id_user = $id")[0];
-
-// $query = "UPDATE users SET status = 'banned' WHERE id_user = $id";
-// mysqli_query($connect, $query);
-// header('Location: profile.php' . '?id=' . $id);
-
-
-
-// if ($data['status'] == 'active') {
-// $query = "UPDATE users SET status = 'banned' WHERE id_user = $id";
-// mysqli_query($connect, $query);
-// header('Location: profile.php');
-// } else {
-// $query = "UPDATE users SET status = 'active' WHERE id_user = $id";
-// mysqli_query($connect, $query);
-// header('Location: profile.php');
-// }

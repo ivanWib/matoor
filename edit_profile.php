@@ -15,12 +15,12 @@ if (isset($_POST["change"])) {
     if (edit($_POST) > 0) {
         echo "<script>
                 alert('Data berhasil diubah!');
-                document.location.href = 'profile.php';
+                document.location.href = 'profile.php?id=$id';
             </script>";
     } else {
         echo "<script>
                 alert('Data gagal diubah!');
-                document.location.href = 'profile.php';
+                document.location.href = 'profile.php?id=$id';
             </script>";
     }
 }
@@ -38,7 +38,7 @@ if (isset($_POST["change"])) {
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Secular+One&display=swap" rel="stylesheet">
-    <title>Profile</title>
+    <title>Edit Profile</title>
 </head>
 
 <body style="background-color:#010409" class="d-flex justify-content-center">
@@ -46,14 +46,16 @@ if (isset($_POST["change"])) {
         <div id="navbar" class="navbar fixed-top d-flex justify-content-between">
             <div class="container">
                 <div>
-                    <a style="text-decoration:none; color:#C8CDD1" href="index.php">
+                    <a style="text-decoration:none; color:#C8CDD1" href="profile.php?id=<?= $id ?>">
                         <iconify-icon icon="akar-icons:arrow-back-thick-fill" width="30" height="30"></iconify-icon>
                     </a>
                 </div>
             </div>
         </div>
-        <div class="card d-flex justify-content-center position-absolute top-50 start-50 translate-middle " style="background-color:#C8CDD1; border-radius:15px; width: 18rem">
-            <img class="card-img-top rounded-circle mt-3 mx-auto" style="width:100px" src="foto/<?= $data["foto"] ?>" alt="Card image cap">
+        <div class="card d-flex justify-content-center position-absolute top-50 start-50 translate-middle "
+            style="background-color:#C8CDD1; border-radius:15px; width: 18rem">
+            <img class="card-img-top rounded-circle mt-3 mx-auto" style="width:100px" src="foto/<?= $data["foto"] ?>"
+                alt="Card image cap">
             <div class="p-4" style="background-color:#C8CDD1">
                 <form action="" method="post" enctype="multipart/form-data">
                     <div>
@@ -65,13 +67,15 @@ if (isset($_POST["change"])) {
                             <input type="text" class="form-control" name="username" value="<?= $data["username"]; ?>" />
                         </div>
                         <div class="form-group mt-2">
-                            <input type="text" class="form-control" name="namalengkap" placeholder="Nama Lengkap" value="<?= $data["nama_lengkap"]; ?>" />
+                            <input type="text" class="form-control" name="namalengkap" placeholder="Nama Lengkap"
+                                value="<?= $data["nama_lengkap"]; ?>" />
                         </div>
                         <div class="form-group mt-2">
-                        <input type="email" class="form-control" name="email" value="<?= $data["email"]; ?>" />
+                            <input type="email" class="form-control" name="email" value="<?= $data["email"]; ?>" />
                         </div>
                         <div class="form-group ">
-                            <button type="submit" name="submit" class="btn btn-primary mt-4 d-grid justify-content-center w-100">Save</button>
+                            <button type="submit" name="change"
+                                class="btn btn-primary mt-4 d-grid justify-content-center w-100">Save</button>
                         </div>
                     </div>
                 </form>

@@ -2,6 +2,11 @@
 session_start();
 require 'utilities.php';
 
+if (isset($_SESSION['login'])) {
+    $login = $_SESSION["id_user"];
+} else {
+    $login = 0;
+}
 
 $category = $_GET["category"];
 
@@ -133,6 +138,17 @@ foreach ($result as $row) {
                                                 width="20" height="20"></iconify-icon>
                                         </a>
                                         <p style="font-size:15px" class="mb-0 ml-2"><?= $comment["comments"] ?></p>
+                                    </div>
+                                    <div>
+                                        <?php if ($login == "1") { ?>
+                                        <div>
+                                            <a style="text-decoration:none; color:#C8CDD1"
+                                                href="delete.php?id=<?= $row["id_post"] ?>&header=category&table=posts&data=<?= $category ?>">
+                                                <iconify-icon icon="ic:baseline-delete-forever" width="30" height="30">
+                                                </iconify-icon>
+                                            </a>
+                                        </div>
+                                        <?php } ?>
                                     </div>
                                 </div>
                             </div>
