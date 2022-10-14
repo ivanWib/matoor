@@ -8,7 +8,7 @@ if (isset($_SESSION["login"])) {
     $data = array(
         "foto" => "default.png",
         "username" => "Guest",
-        "nama_lengkap" => "Login dulu benk:v",
+        "nama_lengkap" => "READ MODE!",
         "id_user" => 0
     );
 }
