@@ -5,11 +5,18 @@ require 'utilities.php';
 
 $category = $_GET["category"];
 
-if ($category == "all") {
-    $data = query("SELECT * FROM posts");
-} else {
-    $data = query("SELECT * FROM posts WHERE category = '$category'");
+$result = query("SELECT id_post, (SELECT COUNT(*) FROM likes_post WHERE id_post = posts.id_post) * 0.3 + (SELECT COUNT(*) FROM comments WHERE id_post = posts.id_post) * 0.7 AS score FROM posts WHERE category = '$category' ORDER BY score DESC");
+
+$add = array();
+foreach ($result as $row) {
+    $add[] = query("SELECT * FROM posts WHERE id_post = $row[id_post]")[0];
 }
+
+// if ($category == "all") {
+//     $data = query("SELECT * FROM posts");
+// } else {
+//     $data = query("SELECT * FROM posts WHERE category = '$category'");
+// }
 
 ?>
 <!DOCTYPE html>
@@ -52,44 +59,51 @@ if ($category == "all") {
                     <iconify-icon icon="charm:link-external" width="20" height="20"></iconify-icon>
                 </a>
                 <?php if (!isset($_SESSION["login"])) { ?>
-                    <div>
-                        <a style="text-decoration:none; color:#C8CDD1" href="index.php">
-                            <iconify-icon icon="bxs:home-alt-2" width="30" height="30"></iconify-icon>
-                        </a>
-                    </div>
-                    <div>
-                        <a class="d-flex" style="text-decoration:none; color:#C8CDD1" href="login.php">
-                            <iconify-icon class="d-flex align-items-center" icon="clarity:login-solid" width="30" height="30"></iconify-icon>
-                            <h4 class="mb-0">Login</h4>
-                        </a>
-                    </div>
+                <div>
+                    <a style="text-decoration:none; color:#C8CDD1" href="index.php">
+                        <iconify-icon icon="bxs:home-alt-2" width="30" height="30"></iconify-icon>
+                    </a>
+                </div>
+                <div>
+                    <a class="d-flex" style="text-decoration:none; color:#C8CDD1" href="login.php">
+                        <iconify-icon class="d-flex align-items-center" icon="clarity:login-solid" width="30"
+                            height="30"></iconify-icon>
+                        <h4 class="mb-0">Login</h4>
+                    </a>
+                </div>
                 <?php } else { ?>
-                    <div>
-                        <a style="text-decoration:none; color:#C8CDD1" href="index.php">
-                            <iconify-icon icon="bxs:home-alt-2" width="30" height="30"></iconify-icon>
-                        </a>
-                    </div>
+                <div>
+                    <a style="text-decoration:none; color:#C8CDD1" href="index.php">
+                        <iconify-icon icon="bxs:home-alt-2" width="30" height="30"></iconify-icon>
+                    </a>
+                </div>
                 <?php } ?>
             </div>
         </div>
-        <div id="body" style="height:570px; width:900px; margin-top:80px; background-color:#21262D; color:#F9F8F8" class="card overflow-auto">
+        <div id="body" style="height:570px; width:900px; margin-top:80px; background-color:#21262D; color:#F9F8F8"
+            class="card overflow-auto">
             <div id="content" class="d-flex flex-row w-100">
                 <div id="DASHBOARD" class="d-flex justify-content-center w-100">
                     <div id="bungkus" class="w-50">
                         <div style="color:#C8CDD1" class="d-flex justify-content-center mt-3 mb-3">
                             <h1 class="text-uppercase"><?= $category ?></h1>
                         </div>
-                        <?php foreach ($data as $row) :
-                            $user = query("SELECT * FROM users WHERE id_user = " . $row["id_user"])[0];
-                            $like = query("SELECT COUNT(id_user) 'likes' FROM likes_post WHERE id_post = " . $row["id_post"])[0];
-                            $comment = query("SELECT COUNT(id_post) 'comments' FROM comments WHERE id_post = " . $row["id_post"])[0];
+                        <?php foreach ($add as $row) :
+                            $data = query("SELECT * FROM posts WHERE id_post = $row[id_post]")[0];
+                            $user = query("SELECT * FROM users WHERE id_user = " . $data["id_user"])[0];
+                            $like = query("SELECT COUNT(id_user) 'likes' FROM likes_post WHERE id_post = " . $data["id_post"])[0];
+                            $comment = query("SELECT COUNT(id_post) 'comments' FROM comments WHERE id_post = " . $data["id_post"])[0];
                         ?>
-                        <div  class="column">
+                        <div class="column">
                             <div style="background-color:#161B22" class="card mb-4 shadow p-3 mb-3">
-                                <div  class="media d-flex flex-wrap align-items-center justify-content-between">
-                                    <div style="color:#C8CDD1" class="justify-content-between d-flex flex-wrap align-items-center gap-3">
-                                        <a style="text-decoration:none; color:#C8CDD1" class="justify-content-between d-flex flex-wrap align-items-center gap-3" href="profile.php?id=<?= $user["id_user"] ?>">
-                                            <img src="foto/<?= $user["foto"] ?>" alt="foto" class="d-block rounded-circle" width=60>
+                                <div class="media d-flex flex-wrap align-items-center justify-content-between">
+                                    <div style="color:#C8CDD1"
+                                        class="justify-content-between d-flex flex-wrap align-items-center gap-3">
+                                        <a style="text-decoration:none; color:#C8CDD1"
+                                            class="justify-content-between d-flex flex-wrap align-items-center gap-3"
+                                            href="profile.php?id=<?= $user["id_user"] ?>">
+                                            <img src="foto/<?= $user["foto"] ?>" alt="foto"
+                                                class="d-block rounded-circle" width=60>
                                             <h5><?= $user["username"] ?></h5>
                                         </a>
                                     </div>
@@ -106,13 +120,15 @@ if ($category == "all") {
                                 </div>
                                 <div class="d-flex flex-row justify-content-between align-items-center mt-2">
                                     <div style="color:#C8CDD1" class="px-2 pt-2 d-flex gap-2">
-                                        <a style="text-decoration:none; color:#C8CDD1" href="like.php?id=<?= $row["id_post"] ?>&category=<?= $row["category"] ?>&header=category">
+                                        <a style="text-decoration:none; color:#C8CDD1"
+                                            href="like.php?id=<?= $row["id_post"] ?>&category=<?= $row["category"] ?>&header=category">
                                             <iconify-icon icon="fontisto:like" width="20" height="20"></iconify-icon>
                                         </a>
                                         <p style="font-size:15px" class="mb-0 ml-2"><?= $like["likes"] ?></p>
                                     </div>
                                     <div style="color:#C8CDD1" class="px-2 pt-2 d-flex gap-2">
-                                        <a style="text-decoration:none; color:#C8CDD1" href="comment.php?id=<?= $row["id_post"] ?>">
+                                        <a style="text-decoration:none; color:#C8CDD1"
+                                            href="comment.php?id=<?= $row["id_post"] ?>">
                                             <iconify-icon icon="heroicons:chat-bubble-oval-left-ellipsis-solid"
                                                 width="20" height="20"></iconify-icon>
                                         </a>
