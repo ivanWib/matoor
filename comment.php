@@ -2,6 +2,7 @@
 session_start();
 require 'utilities.php';
 
+
 $tanggal = date("d M Y");
 $id = $_GET["id"];
 $add = query("SELECT * FROM posts WHERE id_post = $id");
@@ -51,7 +52,7 @@ $addcomment = query("SELECT * FROM comments WHERE id_post = $id");
                             <p style="color:#0000FF" class="text-uppercase mb-0">#<?= $add[0]["category"]; ?></p>
                         </div>
                         <div class="d-flex align-items-center ml-2 mt-2">
-                            <a style="text-decoration:none;color:#C8CDD1" class="d-flex align-items-center" href="like_post2.php?id=<?= $add[0]["id_post"] ?>&post_id=<?= $id ?>">
+                            <a style="text-decoration:none;color:#C8CDD1" class="d-flex align-items-center" href="like.php?id=<?= $add[0]["id_post"] ?>&header=comment">
                                 <iconify-icon icon="fontisto:like" width="20" height="20"></iconify-icon>
                             </a>
                             <p style="font-size:15px" class="mb-0 ml-2"><?= $like[0]["likes"] ?></p>
@@ -97,7 +98,7 @@ $addcomment = query("SELECT * FROM comments WHERE id_post = $id");
                                 </div>
                                 <div class="d-flex flex-row justify-content-between align-items-center mt-2">
                                     <div style="color:#C8CDD1" class="px-2 pt-2 d-flex gap-2">
-                                        <a style="text-decoration:none; color:#C8CDD1" href="like_comment.php?id=<?= $row["id_comment"] ?>&post_id=<?= $id ?>&header=comment">
+                                        <a style="text-decoration:none; color:#C8CDD1" href="like_comment.php?id=<?= $row["id_comment"] ?>&post_id=<?= $id ?>">
                                             <iconify-icon icon="fontisto:like" width="20" height="20"></iconify-icon>
                                         </a>
                                         <p style="font-size:15px" class="mb-0 ml-2"><?= $like["likes"] ?></p>

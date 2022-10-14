@@ -4,7 +4,6 @@ require "utilities.php";
 
 $id = $_GET["id"];
 if (isset($id)) {
-    
     $data = query("SELECT * FROM users WHERE id_user = $id")[0];
 } else {
     $data = array(
