@@ -4,8 +4,8 @@ require "utilities.php";
 
 global $connect;
 if (isset($_POST["login"])) {
-    $username = $_POST["username"];
-    $password = $_POST["password"];
+    $username = htmlspecialchars(mysqli_real_escape_string($connect, $_POST["username"]));
+    $password = htmlspecialchars(mysqli_real_escape_string($connect, $_POST["password"]));
 
     $hasil = mysqli_query($connect, "SELECT * FROM users WHERE username = '$username'");
 

@@ -101,13 +101,6 @@ foreach ($result as $row) {
                             <h3 class="card-title text-center"><?= $data["username"]; ?></h3>
                             <h5 class="card-title text-center"><?= $data["nama_lengkap"]; ?></h5>
                         </div>
-                        <?php if (isset($_SESSION["login"])) { ?>
-                        <div class="card-body">
-                            <a style="text-decoration:none; color:#C8CDD1"
-                                href="edit_profile.php?id=<?= $data['id_user'] ?>">Edit Profile</a>
-                        </div>
-                        <?php } ?>
-
                     </div>
                 </div>
                 <div id="DASHBOARD" style="width:90%" class="d-flex justify-content-end" style="width:500px">

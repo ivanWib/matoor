@@ -16,7 +16,7 @@ function query($query)
 function registration($data)
 {
     global $connect;
-    $username = strtolower(stripslashes($data["username"]));
+    $username = mysqli_real_escape_string(strtolower(stripslashes($data["username"])));
     $email = strtolower(stripslashes($data["email"]));
     $password = mysqli_real_escape_string($connect, $data["password"]);
     $password2 = mysqli_real_escape_string($connect, $data["confirm_password"]);

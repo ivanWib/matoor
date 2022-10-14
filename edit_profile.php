@@ -15,12 +15,12 @@ if (isset($_POST["change"])) {
     if (edit($_POST) > 0) {
         echo "<script>
                 alert('Data berhasil diubah!');
-                document.location.href = 'index.php';
+                document.location.href = 'profile.php';
             </script>";
     } else {
         echo "<script>
                 alert('Data gagal diubah!');
-                document.location.href = 'index.php';
+                document.location.href = 'profile.php';
             </script>";
     }
 }
