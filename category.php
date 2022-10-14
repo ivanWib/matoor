@@ -107,8 +107,13 @@ foreach ($result as $row) {
             <div id="content" class="d-flex flex-row w-100">
                 <div id="DASHBOARD" class="d-flex justify-content-center w-100">
                     <div id="bungkus" class="w-50">
-                        <div style="color:#C8CDD1" class="d-flex justify-content-center mt-3 mb-3">
+                        <div style="color:#C8CDD1" class="d-flex justify-content-center mt-3 mb-3 gap-3">
                             <h1 class="text-uppercase"><?= $category ?></h1>
+                            <?php if ($login == "1") { ?>
+                                <a style="text-decoration:none; color:#C8CDD1" href="print.php?category=<?= $category ?>">
+                                    <iconify-icon icon="vscode-icons:file-type-pdf2" width="50" height="50"></iconify-icon>
+                                </a>
+                            <?php } ?>
                         </div>
                         <?php foreach ($add as $row) :
                             $data = query("SELECT * FROM posts WHERE id_post = $row[id_post]")[0];

@@ -1,0 +1,17 @@
+{
+    "name": "chris/matoor",
+    "autoload": {
+        "psr-4": {
+            "Chris\\Matoor\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Ivan Wibowo",
+            "email": "christian.ivan@student.umn.ac.id"
+        }
+    ],
+    "require": {
+        "fpdf/fpdf": "^1.84"
+    }
+}
