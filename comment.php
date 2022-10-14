@@ -38,11 +38,12 @@ $addcomment = query("SELECT * FROM comments WHERE id_post = $id");
             <div id="POSTINGAN" class="d-flex flex-column align-items-center">
                 <div class="mt-4 card p-4 overflow-auto" style="width:650px; height:580px; border-radius:20px; background-color:#21262D; color:#C8CDD1">
                     <div class="d-flex">
-                        <img style="width:50px" class="card-img-top rounded-circle" src="foto/<?= $user[0]["foto"] ?>"
-                            alt="foto" />
-                        <div class="d-flex align-items-center ml-3">
-                            <h5 class="mb-0"><?= $user[0]["username"] ?></h5>
-                        </div>
+                        <a style="text-decoration:none; color:#C8CDD1" class="justify-content-between d-flex flex-wrap align-items-center gap-3" href="profile.php?id=<?= $user[0]["id_user"] ?>">
+                            <img style="width:50px" class="card-img-top rounded-circle" src="foto/<?= $user[0]["foto"] ?>" alt="foto" />
+                            <div class="d-flex align-items-center ml-3">
+                                <h5 class="mb-0"><?= $user[0]["username"] ?></h5>
+                            </div>
+                        </a>
                     </div>
                     <div class="mt-3 d-flex flex-column">
                         <div class="card p-3 shadow p-3 mb-3 bg-body" style="border-radius:15px; background-color:#C8CDD1 ;color:#000000">
@@ -82,8 +83,10 @@ $addcomment = query("SELECT * FROM comments WHERE id_post = $id");
                             <div style="border-radius:15px; background-color:#161B22" class="card mb-4 shadow p-3 mb-3">
                                 <div class="media d-flex flex-wrap align-items-center justify-content-between">
                                     <div class="justify-content-between d-flex flex-wrap align-items-center gap-3">
-                                        <img src="foto/<?= $user["foto"] ?>" alt="foto" style="width:50px" class="d-block rounded-circle"/>
-                                        <h5 class="mb-0 ml-3"><?= $user["username"] ?></h5>
+                                        <a style="text-decoration:none; color:#C8CDD1" class="justify-content-between d-flex flex-wrap align-items-center gap-3" href="profile.php?id=<?= $user["id_user"] ?>">
+                                            <img src="foto/<?= $user["foto"] ?>" alt="foto" style="width:50px" class="d-block rounded-circle"/>
+                                            <h5 class="mb-0 ml-3"><?= $user["username"] ?></h5>
+                                        </a>
                                     </div>
                                 </div>
                                 <div style="color:#000000; background-color:#C8CDD1; border-radius:15px" class="card p-2 mt-2">

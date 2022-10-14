@@ -88,9 +88,10 @@ if ($category == "all") {
                             <div style="background-color:#161B22" class="card mb-4 shadow p-3 mb-3">
                                 <div  class="media d-flex flex-wrap align-items-center justify-content-between">
                                     <div style="color:#C8CDD1" class="justify-content-between d-flex flex-wrap align-items-center gap-3">
-                                        <img src="foto/<?= $user["foto"] ?>" alt="foto" class="d-block rounded-circle"
-                                            width=60>
-                                        <h5><?= $user["username"] ?></h5>
+                                        <a style="text-decoration:none; color:#C8CDD1" class="justify-content-between d-flex flex-wrap align-items-center gap-3" href="profile.php?id=<?= $user["id_user"] ?>">
+                                            <img src="foto/<?= $user["foto"] ?>" alt="foto" class="d-block rounded-circle" width=60>
+                                            <h5><?= $user["username"] ?></h5>
+                                        </a>
                                     </div>
                                     <div style="color:#C8CDD1" class="medium ml-3">
                                         <strong>Category: </strong>
