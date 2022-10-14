@@ -13,10 +13,17 @@ if (isset($_POST["login"])) {
         $row = mysqli_fetch_assoc($hasil);
 
         if (password_verify($password, $row["password"])) {
-            $_SESSION["login"] = true;
-            $_SESSION["id_user"] = $row["id_user"];
-            header("Location: index.php");
-            exit;
+            if ($row["status"] == "active" || $row["status"] == "admin") {
+                $_SESSION["login"] = true;
+                $_SESSION["id_user"] = $row["id_user"];
+                header("Location: index.php");
+                exit;
+            } else {
+                echo "<script>
+                        alert('Akun Anda di banned');
+                        document.location.href = 'login.php';
+                    </script>";
+            }
         }
     }
     $error = true;
@@ -39,7 +46,8 @@ if (isset($_POST["login"])) {
     <title>Login</title>
 </head>
 
-<body style="background-color:#010409" class="d-flex position-absolute top-50 start-50 translate-middle justify-content-center">
+<body style="background-color:#010409"
+    class="d-flex position-absolute top-50 start-50 translate-middle justify-content-center">
     <div class="card" style="background-color:#C8CDD1; border-radius:15px; width: 18rem;">
         <img src="foto/banner.png" class="card-img-top" alt="...">
         <div class="card-body">

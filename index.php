@@ -2,8 +2,16 @@
 session_start();
 require "utilities.php";
 
+
+
 if (isset($_SESSION["login"])) {
     $data = query("SELECT * FROM users WHERE id_user = $_SESSION[id_user]")[0];
+    if ($data["status"] == "banned") {
+        echo "<script>
+        alert('Your account has been banned');
+        document.location.href = 'login.php';
+        </script>";
+    }
 } else {
     $data = array(
         "foto" => "default.png",
@@ -117,9 +125,13 @@ foreach ($result as $row) {
                         <div class="column">
                             <div style="background-color:#161B22" class="card mb-4 shadow p-3 mb-3">
                                 <div class="media d-flex flex-wrap align-items-center justify-content-between">
-                                    <div style="color:#C8CDD1" class="justify-content-between d-flex flex-wrap align-items-center gap-3">
-                                        <a style="text-decoration:none; color:#C8CDD1" class="justify-content-between d-flex flex-wrap align-items-center gap-3" href="profile.php?id=<?= $user["id_user"] ?>">
-                                            <img src="foto/<?= $user["foto"] ?>" alt="foto" class="d-block rounded-circle" width=60 />
+                                    <div style="color:#C8CDD1"
+                                        class="justify-content-between d-flex flex-wrap align-items-center gap-3">
+                                        <a style="text-decoration:none; color:#C8CDD1"
+                                            class="justify-content-between d-flex flex-wrap align-items-center gap-3"
+                                            href="profile.php?id=<?= $user["id_user"] ?>">
+                                            <img src="foto/<?= $user["foto"] ?>" alt="foto"
+                                                class="d-block rounded-circle" width=60 />
                                             <h5><?= $user["username"] ?></h5>
                                         </a>
                                     </div>

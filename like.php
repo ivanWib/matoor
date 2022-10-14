@@ -24,4 +24,3 @@ if (isset($_GET["id"])) {
         header("Location:" . $_GET["header"] . ".php?id=" . $_GET["id"] . "&category=" . $_GET["category"]);
     }
 }
-?>

@@ -9,6 +9,7 @@ CREATE TABLE users (
   email         VARCHAR(100) NOT NULL UNIQUE,
   password      VARCHAR(100) NOT NULL,
   foto          VARCHAR(100),
+  status        VARCHAR(10) NOT NULL,
   PRIMARY KEY (id_user)
 );
 
@@ -47,8 +48,8 @@ CREATE TABLE likes_comment (
   FOREIGN KEY (id_user) REFERENCES users(id_user)
 )engine=InnoDB;
 
-INSERT INTO users (username, email, password, foto) 
-VALUES    ('admin', 'admin@gmail.com', '$2y$10$UwGQtOUf1Ln.jTbDfp8Ir.aNjDIQv1mCNWdCdg53i64AsgT3HYr22', 'default.png');
+INSERT INTO users (username, email, password, foto, status)
+VALUES    ('admin', 'admin@gmail.com', '$2y$10$UwGQtOUf1Ln.jTbDfp8Ir.aNjDIQv1mCNWdCdg53i64AsgT3HYr22', 'default.png', 'admin');
 
 
 -- DROP DATABASE matoor;

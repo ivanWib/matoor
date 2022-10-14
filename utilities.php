@@ -16,10 +16,11 @@ function query($query)
 function registration($data)
 {
     global $connect;
-    $username = mysqli_real_escape_string(strtolower(stripslashes($data["username"])));
+    $username = mysqli_real_escape_string($connect, strtolower(stripslashes($data["username"])));
     $email = strtolower(stripslashes($data["email"]));
     $password = mysqli_real_escape_string($connect, $data["password"]);
     $password2 = mysqli_real_escape_string($connect, $data["confirm_password"]);
+    $status = "active";
 
     $result = mysqli_query($connect, "SELECT username FROM users WHERE username = '$username'");
 
@@ -39,7 +40,7 @@ function registration($data)
 
     $password = password_hash($password, PASSWORD_BCRYPT);
 
-    mysqli_query($connect, "INSERT INTO users VALUES('', '$username', '', '$email','$password', 'default.png')");
+    mysqli_query($connect, "INSERT INTO users VALUES('', '$username', '', '$email','$password', 'default.png', '$status')");
 
     return mysqli_affected_rows($connect);
 }

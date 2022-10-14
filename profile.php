@@ -2,6 +2,8 @@
 session_start();
 require "utilities.php";
 
+$login = $_SESSION["id_user"];
+
 $id = $_GET["id"];
 if (isset($id)) {
     $data = query("SELECT * FROM users WHERE id_user = $id")[0];
@@ -46,24 +48,28 @@ $add = query("SELECT * FROM posts WHERE id_user = $id");
                 <?php if (!isset($_SESSION["login"])) { ?>
                 <div>
                     <a class="d-flex" style="text-decoration:none; color:#C8CDD1" href="login.php">
-                        <iconify-icon class="d-flex align-items-center" icon="clarity:login-solid" width="30" height="30"></iconify-icon>
+                        <iconify-icon class="d-flex align-items-center" icon="clarity:login-solid" width="30"
+                            height="30"></iconify-icon>
                         <h4 class="mb-0">Login</h4>
                     </a>
                 </div>
                 <?php } else { ?>
-                    <div>
-                        <a class="d-flex" style="text-decoration:none; color:#C8CDD1" href="logout.php">
-                            <iconify-icon class="d-flex align-items-center" icon="clarity:logout-solid" width="30" height="30"></iconify-icon>
-                            <h4 class="mb-0">Logout</h4>
-                        </a>
-                    </div>
+                <div>
+                    <a class="d-flex" style="text-decoration:none; color:#C8CDD1" href="logout.php">
+                        <iconify-icon class="d-flex align-items-center" icon="clarity:logout-solid" width="30"
+                            height="30"></iconify-icon>
+                        <h4 class="mb-0">Logout</h4>
+                    </a>
+                </div>
                 <?php } ?>
             </div>
         </div>
-        <div id="body" style="height:570px; width:1200px; margin-top:80px; background-color:#21262D; color:#F9F8F8" class="card overflow-auto">
+        <div id="body" style="height:570px; width:1200px; margin-top:80px; background-color:#21262D; color:#F9F8F8"
+            class="card overflow-auto">
             <div id="content" class="d-flex flex-row w-100">
                 <div id="PROFILE" class="w-25 d-flex justify-content-center position-fixed">
-                    <div style="height:350px; background-color:#161B22; color:#C8CDD1" class="w-75 mt-5 card d-flex flex-column align-items-center shadow p-3 mb-3">
+                    <div style="height:350px; background-color:#161B22; color:#C8CDD1"
+                        class="w-75 mt-5 card d-flex flex-column align-items-center shadow p-3 mb-3">
                         <img class="card-img-top rounded-circle mt-3" style="width:100px"
                             src="foto/<?= $data["foto"] ?>" alt="Card image cap">
                         <div class="card-body">
@@ -73,7 +79,16 @@ $add = query("SELECT * FROM posts WHERE id_user = $id");
                         </div>
                         <?php if (isset($_SESSION["login"])) { ?>
                         <div class="card-body">
-                            <a style="text-decoration:none; color:#C8CDD1" href="edit_profile.php?id=<?= $data['id_user'] ?>">Edit Profile</a>
+                            <a style="text-decoration:none; color:#C8CDD1"
+                                href="edit_profile.php?id=<?= $data['id_user'] ?>">Edit Profile</a>
+                        </div>
+                        <?php } ?>
+                        <!-- ban -->
+                        <?php if ($login == "1") { ?>
+                        <div>
+                            <a style="text-decoration:none; color:#C8CDD1" href="ban.php?id=<?= $id ?>">
+                                <iconify-icon icon="fa-solid:user-slash" width="30" height="30"></iconify-icon>
+                            </a>
                         </div>
                         <?php } ?>
                     </div>
@@ -91,7 +106,8 @@ $add = query("SELECT * FROM posts WHERE id_user = $id");
                         <div class="column">
                             <div style="background-color:#161B22" class="card mb-4 shadow p-3 mb-3">
                                 <div class="media d-flex flex-wrap align-items-center justify-content-between">
-                                    <div style="color:#C8CDD1" class="justify-content-between d-flex flex-wrap align-items-center gap-3">
+                                    <div style="color:#C8CDD1"
+                                        class="justify-content-between d-flex flex-wrap align-items-center gap-3">
                                         <img src="foto/<?= $user["foto"] ?>" alt="foto" class="d-block rounded-circle"
                                             width=60>
                                         <h5><?= $user["username"] ?></h5>
@@ -109,13 +125,15 @@ $add = query("SELECT * FROM posts WHERE id_user = $id");
                                 </div>
                                 <div class="d-flex flex-row justify-content-between align-items-center mt-2">
                                     <div style="color:#C8CDD1" class="px-2 pt-2 d-flex gap-2">
-                                        <a style="text-decoration:none; color:#C8CDD1" href="like_post.php?id=<?= $row["id_post"] ?>">
+                                        <a style="text-decoration:none; color:#C8CDD1"
+                                            href="like_post.php?id=<?= $row["id_post"] ?>">
                                             <iconify-icon icon="fontisto:like" width="20" height="20"></iconify-icon>
                                         </a>
                                         <p style="font-size:15px" class="mb-0 ml-2"><?= $like["likes"] ?></p>
                                     </div>
                                     <div style="color:#C8CDD1" class="px-2 pt-2 d-flex gap-2">
-                                        <a style="text-decoration:none; color:#C8CDD1" href="comment.php?id=<?= $row["id_post"] ?>">
+                                        <a style="text-decoration:none; color:#C8CDD1"
+                                            href="comment.php?id=<?= $row["id_post"] ?>">
                                             <iconify-icon icon="heroicons:chat-bubble-oval-left-ellipsis-solid"
                                                 width="20" height="20"></iconify-icon>
                                         </a>
